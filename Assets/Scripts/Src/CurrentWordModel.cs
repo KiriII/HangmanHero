@@ -17,9 +17,11 @@ namespace HangmanHero
 
         public int[] CheckLetterInWord(char letter)
         {
-            openChars.Add(openChars.Count);
-            return new int[1] { openChars.Count };
+            //openChars.Add(openChars.Count);
+            //return new int[1] { openChars.Count };
             // TO DO
+
+            return new int[0] {};
         }
 
         public bool CheckGameWon()

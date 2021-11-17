@@ -24,22 +24,28 @@ namespace HangmanHero
 
         public void GameStart(bool won = false)   // вызывается в input
         {
+            var word = currentWordModel.GetWord();
+
             if (won)
             {
-                gameModel.RemoveUsedWord(hangmanStartController.currentWordModel.GetWord());  // bad
+                gameModel.RemoveUsedWord(word); 
 
             }
 
             Debug.Log($"Оставшиеся неодгаданные слова: {string.Join(", ", gameModel.getUnusedWords().Cast<string>().ToArray())}");
 
             // check words not empty
-            currentWordModel.SetWord(RandomWord());
+
+            currentWordModel.SetWord(RandomWord(word));
             hangmanStartController.StartHangmanGame();
         }
 
-        private string RandomWord()
+        private string RandomWord(string word)
         {
-            var words = gameModel.getUnusedWords();   // unused words, not all
+            var words = new ArrayList(gameModel.getUnusedWords());   // unused words, not all
+            words.Remove(word);
+
+            Debug.Log($"Оставшиеся неодгаданные неповторяющиеся слова: {string.Join(", ", words.Cast<string>().ToArray())}");
 
             System.Random rnd = new System.Random();
             return (string)words[rnd.Next(words.Count)];
