@@ -10,8 +10,10 @@ namespace HangmanHero
         private ArrayList unusedWords;
 
         public GameModel()
-        {                                                       // TO DO
-            allKnownWords = new ArrayList() { "сундук", "покер", "вилы", "румба", "карамба" };  // TO DO
+        {
+            var wordXMLParser = new WordsXMLParser();
+
+            allKnownWords = wordXMLParser.GetAllKnownWords(); 
             unusedWords = new ArrayList(allKnownWords);
 
             if (!CheckDataNotNull(allKnownWords))
