@@ -19,8 +19,11 @@ namespace HangmanHero
         private void ParseFromXML(ref ArrayList words)
         {
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(Constants.wordsXMLpath);
-            // получим корневой элемент
+
+            string assetsFolderPath = Application.dataPath;
+            xDoc.Load(assetsFolderPath + Constants.wordsXMLpath);
+
+            //string levelFolder = AssetsFolderPath + "/Resources/Levels";
             XmlElement xRoot = xDoc.DocumentElement;
             if (xRoot != null)
             {
