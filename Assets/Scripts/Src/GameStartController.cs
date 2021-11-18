@@ -7,7 +7,7 @@ namespace HangmanHero
 {
     public class GameStartController 
     { 
-        private HangmanStartController hangmanStartController;
+        public HangmanStartController hangmanStartController; // better be private
 
         private GameModel gameModel;
         private CurrentWordModel currentWordModel;

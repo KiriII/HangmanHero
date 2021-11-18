@@ -6,11 +6,10 @@ namespace HangmanHero
 {
     public class TurnsController 
     {
+        private EndGameController endGameController;
 
         private CurrentWordModel currentWordModel;
         private ErrorsModel errorsModel;
-
-        private EndGameController endGameController;
 
         public TurnsController(CurrentWordModel currentWordModel)
         {
@@ -20,26 +19,13 @@ namespace HangmanHero
             endGameController = new EndGameController(this.currentWordModel, errorsModel);
         }
 
-        public void PlayGame()
-        {
-            // init input letters 
-            Debug.Log($"Game End {currentWordModel.CheckGameWon()}");
-            while (currentWordModel.CheckGameWon() != errorsModel.AreErrorsLeft())
-            {
-                Turn('a'); // debug
-            }
-
-            Debug.Log($"Game End {currentWordModel.CheckGameWon()} {errorsModel.AreErrorsLeft()}");
-            endGameController.GameEnd();
-        }
-
-        private void Turn(char letter)
+        public void Turn(char letter)
         {
             // chnge view or change 
 
             var openedWord = currentWordModel.CheckLetterInWord(letter);
 
-            if (openedWord.Length > 0)
+            if (openedWord)
             {
                 // to do redraw
                 Debug.Log($"you think there is a letter {letter} ???");
@@ -53,29 +39,12 @@ namespace HangmanHero
                 Debug.Log($"upsiiii you have made a mistake and you done {errors} mistakes looool");
                 // to do redraw
             }
-        }
 
-        /*void Update()
-        {
-            if (!string.IsNullOrEmpty(word))
+            if (currentWordModel.CheckGameWon() == errorsModel.AreErrorsLeft())
             {
-                //Debug.Log(word);
-                if (Input.GetKeyDown("up"))
-                {
-                    openChars.Add(openChars.Count);
-
-                    Debug.Log($"Right! Only {errorsLeft} left");
-                    Debug.Log($"{GetCurrentKnownWord()}");
-                }
-
-                if (Input.GetKeyDown("down"))
-                {
-                    errorsLeft--;
-                    Debug.Log($"Not right. Only {errorsLeft} left");
-                    Debug.Log($"{GetCurrentKnownWord()}");
-                }
+                endGameController.GameEnd();
             }
-        }*/
+        }
 
         private string GetCurrentKnownWord()
         {

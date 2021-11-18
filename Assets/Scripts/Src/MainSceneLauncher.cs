@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace HangmanHero
 {
@@ -8,6 +9,7 @@ namespace HangmanHero
     {
         [SerializeField] public GameObject MainUI;
         public GameStartController gameStartController;
+        private TextsModel textsModel;
 
         public bool won;
 
@@ -16,6 +18,9 @@ namespace HangmanHero
             // Game Start to do
             won = false;
             gameStartController = new GameStartController();
+
+            // debug
+            textsModel = new TextsModel();
         }
 
         void Update()   // DELETE AFTER ADD VIEW 

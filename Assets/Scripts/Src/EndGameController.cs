@@ -21,6 +21,7 @@ namespace HangmanHero
 
         public void GameEnd()
         {
+            app.gameStartController.hangmanStartController.gameStatesView.DisableKeyboard(); // bad. need to change
 
             if (currentWordModel.CheckGameWon())
             {

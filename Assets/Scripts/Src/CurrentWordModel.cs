@@ -15,13 +15,22 @@ namespace HangmanHero
             openChars = new ArrayList();
         }
 
-        public int[] CheckLetterInWord(char letter)
+        public bool CheckLetterInWord(char letter)
         {
-            //openChars.Add(openChars.Count);
-            //return new int[1] { openChars.Count };
-            // TO DO
+            var haveLetter = false;
 
-            return new int[0] {};
+            for (int i = word.IndexOf(letter); i > -1; i = word.IndexOf(letter, i + 1))  
+            {
+
+                if (!openChars.Contains(i))
+                {
+                    openChars.Add(i);
+                }
+
+                haveLetter = true;
+            }
+
+            return haveLetter;
         }
 
         public bool CheckGameWon()

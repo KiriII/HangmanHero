@@ -26,7 +26,7 @@ namespace HangmanHero
         {
             if (unusedWords.Count == 1)
             {
-                unusedWords = allKnownWords;
+                unusedWords = new ArrayList(allKnownWords);
             }
             else
             {
