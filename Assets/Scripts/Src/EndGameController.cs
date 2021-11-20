@@ -21,8 +21,6 @@ namespace HangmanHero
 
         public void GameEnd()
         {
-            app.gameStartController.hangmanStartController.gameStatesView.DisableKeyboard(); // bad. need to change
-
             if (currentWordModel.CheckGameWon())
             {
                 scoreModel.Win();
@@ -36,8 +34,8 @@ namespace HangmanHero
                 ModelsReset();
             }
 
-            Debug.Log($"wins = {scoreModel.GetWins()} loses = {scoreModel.GetLoses()}");
-
+            app.gameStartController.hangmanStartController.gameStatesView.DisableKeyboard(); // bad. need to change
+            app.gameStartController.hangmanStartController.gameStatesView.UpdateScore(scoreModel.GetWins(), scoreModel.GetLoses()); // bad. need to change
         }
 
         private void ModelsReset()

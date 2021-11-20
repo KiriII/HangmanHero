@@ -12,14 +12,17 @@ namespace HangmanHero
         private GameModel gameModel;
         private CurrentWordModel currentWordModel;
 
+        private StartStateView startStateView;
+
         public GameStartController()
         {
             gameModel = new GameModel();
             currentWordModel = new CurrentWordModel();
-            hangmanStartController = new HangmanStartController(currentWordModel);
+            hangmanStartController = new HangmanStartController(currentWordModel, this);
 
-            // init view + input 
-            Debug.Log($"The game has begun!");
+            startStateView = new StartStateView(this);
+ 
+            //Debug.Log($"The game has begun!");
         }
 
         public void GameStart(bool won = false)   // вызывается в input

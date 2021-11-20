@@ -11,6 +11,8 @@ namespace HangmanHero
         private CurrentWordModel currentWordModel;
         private ErrorsModel errorsModel;
 
+        private GameStatesView gameStatesView;
+
         public TurnsController(CurrentWordModel currentWordModel)
         {
             this.currentWordModel = currentWordModel;
@@ -21,23 +23,17 @@ namespace HangmanHero
 
         public void Turn(char letter)
         {
-            // chnge view or change 
-
             var openedWord = currentWordModel.CheckLetterInWord(letter);
 
             if (openedWord)
             {
-                // to do redraw
-                Debug.Log($"you think there is a letter {letter} ???");
-
-                Debug.Log(GetCurrentKnownWord());
+                gameStatesView.UpdateWord(currentWordModel.GetOpenChars(), currentWordModel.GetWord());
             }
             else
             {
                 var errors = errorsModel.ErrorDone();
 
-                Debug.Log($"upsiiii you have made a mistake and you done {errors} mistakes looool");
-                // to do redraw
+                gameStatesView.UpdateHangman(errors - 1);
             }
 
             if (currentWordModel.CheckGameWon() == errorsModel.AreErrorsLeft())
@@ -46,18 +42,10 @@ namespace HangmanHero
             }
         }
 
-        private string GetCurrentKnownWord()
+        // КОСТЫЛЬ 
+        public void SetGameStateView(GameStatesView gameStatesView)
         {
-            var result = "";
-
-            for (int i = 0; i < currentWordModel.GetWord().Length; i++)
-            {
-                if (currentWordModel.GetOpenChars().Contains(i))
-                    result += $"{currentWordModel.GetWord()[i]} ";
-                else result += "_ ";
-            }
-
-            return result;
+            this.gameStatesView = gameStatesView;
         }
     }
 }

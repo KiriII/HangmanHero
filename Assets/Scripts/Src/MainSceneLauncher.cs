@@ -7,7 +7,7 @@ namespace HangmanHero
 {
     public class MainSceneLauncher : MonoBehaviour
     {
-        [SerializeField] public GameObject MainUI;
+        [SerializeField] public GameObject mainUI;
         public GameStartController gameStartController;
         private TextsModel textsModel;
 
@@ -21,14 +21,6 @@ namespace HangmanHero
 
             // debug
             textsModel = new TextsModel();
-        }
-
-        void Update()   // DELETE AFTER ADD VIEW 
-        {
-            if (Input.GetKeyDown("space"))
-            {
-                gameStartController.GameStart(won);
-            }
         }
     }
 

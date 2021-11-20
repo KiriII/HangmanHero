@@ -51,7 +51,7 @@ namespace HangmanHero
 
         // getters 
 
-        public ArrayList GetOpenChars()   // better not use 
+        public ArrayList GetOpenChars()   
         {
             return openChars;
         }
@@ -64,15 +64,7 @@ namespace HangmanHero
         public void SetWord(string word)
         {
             this.word = word;
-            Debug.Log($"psssst word is {word}");    //   -----------------
-
-            var emptyWord = "";                     //
-            for (int i = 0; i < word.Length; i++)   // 
-            {
-                emptyWord += "_ ";                  //    DELETE
-            }
-
-            Debug.Log($"Угадай слово {emptyWord}"); // ------------------
+            Debug.Log($"psssst word is {word}");    //  debug
         }
     }
 }

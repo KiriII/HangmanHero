@@ -13,23 +13,20 @@ namespace HangmanHero
 
         public GameStatesView gameStatesView; // better be private
 
-        public HangmanStartController(CurrentWordModel currentWordModel)
+        public HangmanStartController(CurrentWordModel currentWordModel, GameStartController gameStartController)
         {
             this.currentWordModel = currentWordModel;
             turnsController = new TurnsController(this.currentWordModel);
 
             alphabetModel = new AlphabetModel();
 
-            gameStatesView = new GameStatesView(alphabetModel.GetAlphabet(), turnsController);
+            gameStatesView = new GameStatesView(alphabetModel.GetAlphabet(), turnsController, gameStartController);
+            turnsController.SetGameStateView(gameStatesView);  // КОСТЫЛЬ
         }
 
         public void StartHangmanGame()
         {
-            // send word.Lenght to View 
-            // change UI state to game + init game state
-            Debug.Log("Start turns");
-
-            gameStatesView.InableKeyboard();
+            gameStatesView.StartGame(currentWordModel.GetWord().Length);
         }
     }
 }
