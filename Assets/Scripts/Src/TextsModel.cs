@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 namespace HangmanHero
 {
     public class TextsModel
     {
-
         private Dictionary<string, string> texts;
 
         public TextsModel()

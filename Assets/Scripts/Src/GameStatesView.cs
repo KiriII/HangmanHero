@@ -7,11 +7,10 @@ namespace HangmanHero
     public class GameStatesView : HangmanElement
     {
         private TurnsController turnsController;
-        private HangmanStartController hangmanStartController;
+        private TextsModel textsModel;
 
         private GameObject stateGame;
 
-        //keyboard
         private Transform keyboardList;
         private GameObject keyboardItem;
 
@@ -22,6 +21,7 @@ namespace HangmanHero
 
         private GameObject score;
 
+        private GameObject gameStateRestart;
         private GameObject txtGameOver;
         private GameObject buttonRestart;
 
@@ -31,8 +31,30 @@ namespace HangmanHero
         public GameStatesView(ArrayList alphabet, TurnsController turnsController, GameStartController gameStartController)
         {
             this.turnsController = turnsController;
-            this.hangmanStartController = hangmanStartController;
+            textsModel = app.textsModel;
 
+            lettersItemsList = new ArrayList();
+            errorsImages = new ArrayList();
+            
+            InitGameObjects();
+            SetTextes();
+            CreateKeyboard(alphabet);
+            UpdateScore(0, 0);
+
+            buttonRestart.GetComponent<Button>().onClick.AddListener(() => gameStartController.GameStart());
+        }
+
+        public void StartGame(int wordLenght)
+        {
+            stateGame.SetActive(true);
+            InableKeyboard();
+            ClearWordView();
+            InitWord(wordLenght);
+            ClearHangman();
+        }
+
+        private void InitGameObjects()
+        {
             stateGame = app.mainUI.transform.GetChild(0).GetChild(1).GetChild(1).gameObject;
 
             keyboardList = stateGame.transform.GetChild(1).GetChild(0);
@@ -47,38 +69,19 @@ namespace HangmanHero
 
             score = stateGame.transform.GetChild(2).gameObject;
 
-            txtGameOver = stateGame.transform.GetChild(1).GetChild(1).GetChild(0).gameObject;
-            buttonRestart = stateGame.transform.GetChild(1).GetChild(1).GetChild(1).gameObject;
-
-            buttonRestart.transform.GetChild(0).gameObject.GetComponent<Text>().text = "ИГРАТЬ ЕЩЁ РАЗ";
-            txtGameOver.GetComponent<Text>().text = "";
-            buttonRestart.GetComponent<Button>().onClick.AddListener(() => gameStartController.GameStart());
-
-            txtGameOver.SetActive(false);
-            buttonRestart.SetActive(false);
-
-            errorsImages = new ArrayList();
+            gameStateRestart = stateGame.transform.GetChild(1).GetChild(1).gameObject;
+            txtGameOver = gameStateRestart.transform.GetChild(0).gameObject;
+            buttonRestart = gameStateRestart.transform.GetChild(1).gameObject;
 
             foreach (Transform child in hangman)
             {
                 errorsImages.Add(child.gameObject);
             }
-
-            CreateKeyboard(alphabet);
-            keyboardList.gameObject.SetActive(false);
-
-            lettersItemsList = new ArrayList();
-
-            UpdateScore(0, 0);
         }
 
-        public void StartGame(int wordLenght)
+        private void SetTextes()
         {
-            stateGame.SetActive(true);
-            InableKeyboard();
-            ClearWordView();
-            InitWord(wordLenght);
-            ClearHangman();
+            buttonRestart.transform.GetChild(0).gameObject.GetComponent<Text>().text = textsModel.GetTextByKey("buttonGameRestart");
         }
 
         // -------------------keyboard----------------------------
@@ -99,17 +102,14 @@ namespace HangmanHero
         public void InableKeyboard()
         {
             keyboardList.gameObject.SetActive(true);
-
-            txtGameOver.SetActive(false);
-            buttonRestart.SetActive(false);
+            gameStateRestart.SetActive(false);
         }
 
-        public void DisableKeyboard()
+        public void DisableKeyboard(bool won)
         {
             keyboardList.gameObject.SetActive(false);
-
-            txtGameOver.SetActive(true);
-            buttonRestart.SetActive(true);
+            txtGameOver.GetComponent<Text>().text = won ? textsModel.GetTextByKey("winText") : textsModel.GetTextByKey("loseText");
+            gameStateRestart.SetActive(true);
         }
 
         // -------------------current word----------------------------
@@ -164,7 +164,10 @@ namespace HangmanHero
         // -------------------Score----------------------------
         public void UpdateScore(int wins, int loses)
         {
-            score.GetComponent<Text>().text = $"Выиграно: {wins}. Проиграно:{loses} .";
+            var scoreText = textsModel.GetTextByKey("score");
+            scoreText = scoreText.Replace("{wins}", wins.ToString());
+            scoreText = scoreText.Replace("{loses}", loses.ToString());
+            score.GetComponent<Text>().text = scoreText;
         }
     }
 }

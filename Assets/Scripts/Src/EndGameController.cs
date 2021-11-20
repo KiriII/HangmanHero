@@ -34,7 +34,7 @@ namespace HangmanHero
                 ModelsReset();
             }
 
-            app.gameStartController.hangmanStartController.gameStatesView.DisableKeyboard(); // bad. need to change
+            app.gameStartController.hangmanStartController.gameStatesView.DisableKeyboard(app.won); // bad. need to change
             app.gameStartController.hangmanStartController.gameStatesView.UpdateScore(scoreModel.GetWins(), scoreModel.GetLoses()); // bad. need to change
         }
 

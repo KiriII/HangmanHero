@@ -9,18 +9,14 @@ namespace HangmanHero
     {
         [SerializeField] public GameObject mainUI;
         public GameStartController gameStartController;
-        private TextsModel textsModel;
+        public TextsModel textsModel;
 
         public bool won;
 
         private void Start()
         {
-            // Game Start to do
-            won = false;
-            gameStartController = new GameStartController();
-
-            // debug
             textsModel = new TextsModel();
+            gameStartController = new GameStartController();
         }
     }
 
