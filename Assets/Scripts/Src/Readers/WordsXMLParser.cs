@@ -20,8 +20,8 @@ namespace HangmanHero
         {
             XmlDocument xDoc = new XmlDocument();
 
-            string assetsFolderPath = Application.dataPath;
-            xDoc.Load(assetsFolderPath + Constants.wordsXMLpath);
+            var textAssetXML = Resources.Load<TextAsset>(Constants.wordsXMLpath);
+            xDoc.LoadXml(textAssetXML.text);
 
             //string levelFolder = AssetsFolderPath + "/Resources/Levels";
             XmlElement xRoot = xDoc.DocumentElement;

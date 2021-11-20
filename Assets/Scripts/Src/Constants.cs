@@ -11,7 +11,7 @@ namespace HangmanHero
         public const int ruAlphabetExceptionStart = 1045;
         public const int ruAlphabetExceptionSourse = 1025;
 
-        public const string wordsXMLpath = "\\Data\\words.xml";
-        public const string textUIruPath = "\\Data\\Text\\TextUI_ru.json";
+        public const string wordsXMLpath = "Data/words";
+        public const string textUIruPath = "Data/Text/TextUI_ru";
     }
 }

@@ -14,9 +14,9 @@ namespace HangmanHero
         {
             texts = new Dictionary<string, string>();
 
-            var filePath = Application.dataPath + Constants.textUIruPath;
+            var fileText = Resources.Load<TextAsset>(Constants.textUIruPath);
 
-            parseKeysAndKeys(File.ReadAllText(filePath));
+            parseKeysAndKeys(fileText.text);
         }
 
         // it's better parser i've ever seen. Belive me
