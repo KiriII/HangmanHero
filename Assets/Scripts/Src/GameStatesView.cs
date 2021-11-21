@@ -56,23 +56,23 @@ namespace HangmanHero
 
         private void InitGameObjects()
         {
-            stateGame = app.mainUI.transform.GetChild(0).GetChild(1).GetChild(1).gameObject;
+            stateGame = GameObjectFinder.FindObject(app.mainUI, "StateGame");
 
-            keyboardList = stateGame.transform.GetChild(1).GetChild(0);
-            keyboardItem = keyboardList.GetChild(0).gameObject;
+            keyboardList = GameObjectFinder.FindObject(stateGame, "GameStateKeyboard").transform;
+            keyboardItem = keyboardList.GetComponentsInChildren<Button>()[0].gameObject;
             keyboardItem.SetActive(false);
 
-            letterList = stateGame.transform.GetChild(0).GetChild(0);
+            letterList = GameObjectFinder.FindObject(stateGame, "LetterList").transform;
             letterItem = letterList.GetChild(0).gameObject;
             letterItem.SetActive(false);
 
-            hangman = stateGame.transform.GetChild(0).GetChild(1);
+            hangman = GameObjectFinder.FindObject(stateGame, "Hangman").transform; 
 
-            score = stateGame.transform.GetChild(2).gameObject;
+            score = GameObjectFinder.FindObject(stateGame, "TxtStatus");
 
-            gameStateRestart = stateGame.transform.GetChild(1).GetChild(1).gameObject;
-            txtGameOver = gameStateRestart.transform.GetChild(0).gameObject;
-            buttonRestart = gameStateRestart.transform.GetChild(1).gameObject;
+            gameStateRestart = GameObjectFinder.FindObject(stateGame, "GameStateRestart"); 
+            txtGameOver = gameStateRestart.GetComponentsInChildren<Text>()[0].gameObject;
+            buttonRestart = gameStateRestart.GetComponentsInChildren<Button>()[0].gameObject;
 
             foreach (Transform child in hangman)
             {
@@ -82,7 +82,7 @@ namespace HangmanHero
 
         private void SetTextes()
         {
-            buttonRestart.transform.GetChild(0).gameObject.GetComponent<Text>().text = textsModel.GetTextByKey("buttonGameRestart");
+            buttonRestart.GetComponentsInChildren<Text>()[0].text = textsModel.GetTextByKey("buttonGameRestart");
         }
 
         // -------------------keyboard----------------------------
@@ -92,10 +92,9 @@ namespace HangmanHero
             {
                 var newKeyboardItem = Instantiate(keyboardItem, keyboardList);
 
-                var key = newKeyboardItem.GetComponent<Button>();
-                key.onClick.AddListener(() => viewsController.TurnsButtonPressed((char)letter));
+                newKeyboardItem.GetComponent<Button>().onClick.AddListener(() => viewsController.TurnsButtonPressed((char)letter));
 
-                newKeyboardItem.transform.GetChild(0).gameObject.GetComponent<Text>().text = letter.ToString(); // bad need to change. like construct mb?
+                newKeyboardItem.GetComponentsInChildren<Text>()[0].text = letter.ToString(); // bad need to change. like construct mb?
                 newKeyboardItem.SetActive(true);
             }
         }
@@ -121,7 +120,7 @@ namespace HangmanHero
             {
                 var newLetterItem = Instantiate(letterItem, letterList);
 
-                newLetterItem.transform.GetChild(1).gameObject.GetComponent<Text>().text = textsModel.GetTextByKey("unknownLetter"); // bad need to change. like construct mb?
+                newLetterItem.GetComponentsInChildren<Text>()[0].text = textsModel.GetTextByKey("unknownLetter"); // bad need to change. like construct mb?
                 newLetterItem.SetActive(true);
 
                 lettersItemsList.Add(newLetterItem);
@@ -133,7 +132,7 @@ namespace HangmanHero
             foreach (int letterNumber in openWords)
             {
                 var letterGameObject = (GameObject)lettersItemsList[letterNumber];    // bad
-                letterGameObject.transform.GetChild(1).gameObject.GetComponent<Text>().text = word[letterNumber].ToString(); // bad need to change. like construct mb?
+                letterGameObject.GetComponentsInChildren<Text>()[0].text = word[letterNumber].ToString(); // bad need to change. like construct mb?
             }
         }
 

@@ -27,9 +27,12 @@ namespace HangmanHero
             {
                 unusedWords = new ArrayList(allKnownWords);
             }
-            else
+            else if (unusedWords.Count > 1)
             {
                 unusedWords.Remove(word);
+            } else
+            {
+                throw new System.Exception("Ошибка при обновлении списка неиспользованных слов");
             }
         }
 

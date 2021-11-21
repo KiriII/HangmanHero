@@ -19,6 +19,11 @@
 
         public bool AreErrorsLeft()
         {
+            if (currentErrors > maxErrors + 1)
+            {
+                throw new System.Exception("Ошибка при подсчёте ошибок. Слишком много ошибок");
+            }
+
             if (maxErrors - currentErrors == -1)
             {
                 return false;

@@ -60,6 +60,10 @@ namespace HangmanHero
 
         public void SetWord(string word)
         {
+            if (word?.Length == 0)
+            {
+                throw new System.Exception("Ошибка при задании слова. Длина слова = 0");
+            }
             this.word = word;
             if (Constants.currentWordDebugLog)
             {

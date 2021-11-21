@@ -11,6 +11,11 @@ namespace HangmanHero
             var textJSONReader = new TextJSONReader();
 
             texts = textJSONReader.GetTexts();
+
+            if (texts.Count == 0)
+            {
+                throw new System.Exception("Ошибка при чтении текстов. Текстов совсем нет");
+            }
         }
 
         // getters

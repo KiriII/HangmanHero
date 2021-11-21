@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using UnityEngine;
+using System.Linq;
 
 namespace HangmanHero
 {
@@ -24,12 +26,17 @@ namespace HangmanHero
             if (won)
             {
                 gameModel.RemoveUsedWord(word);
-
             }
 
-            // Debug.Log($"Оставшиеся неодгаданные слова: {string.Join(", ", gameModel.getUnusedWords().Cast<string>().ToArray())}");
+            //Debug.Log($"Оставшиеся неодгаданные слова: {string.Join(", ", gameModel.getUnusedWords().Cast<string>().ToArray())}");
 
             currentWordModel.SetWord(RandomWord(word));
+
+            if (word == currentWordModel.GetWord())
+            {
+                throw new System.Exception("Ошибка при рандомировании нового слова");
+            }
+
             viewsController.StartGameViewUpdate(currentWordModel.GetWord().Length);
         }
 
@@ -38,7 +45,7 @@ namespace HangmanHero
             var words = new ArrayList(gameModel.getUnusedWords());   // unused words, not all
             words.Remove(word);
 
-            // Debug.Log($"Оставшиеся неодгаданные неповторяющиеся слова: {string.Join(", ", words.Cast<string>().ToArray())}");
+            //Debug.Log($"Оставшиеся неодгаданные неповторяющиеся слова: {string.Join(", ", words.Cast<string>().ToArray())}");
 
             System.Random rnd = new System.Random();
             return (string)words[rnd.Next(words.Count)];

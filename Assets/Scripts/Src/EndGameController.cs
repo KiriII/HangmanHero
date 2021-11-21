@@ -19,17 +19,21 @@
 
         public void GameEnd()
         {
-            bool won = false; 
+            bool won = currentWordModel.CheckGameWon();
+            bool lose = !errorsModel.AreErrorsLeft();
 
-            if (currentWordModel.CheckGameWon())
+            if (won == lose)
+            {
+                throw new System.Exception("Ошибка при подсчёте результата игры");
+            }
+
+            if (won)
             {
                 scoreModel.Win();
-                won = true;
             }
-            else if (!errorsModel.AreErrorsLeft())
+            else
             {
                 scoreModel.Lose();
-                won = false;
             }
 
             viewsController.GameEndViewRedraw(scoreModel.GetWins(), scoreModel.GetLoses(), won, currentWordModel.GetWord());
