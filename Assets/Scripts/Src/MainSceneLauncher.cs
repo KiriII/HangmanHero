@@ -1,17 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
+﻿using UnityEngine;
 
 namespace HangmanHero
 {
     public class MainSceneLauncher : MonoBehaviour
     {
-        [SerializeField] public GameObject mainUI;
+        [SerializeField] 
+        public GameObject mainUI;
+
         public GameStartController gameStartController;
         public TextsModel textsModel;
-
-        public bool won;
 
         private void Start()
         {

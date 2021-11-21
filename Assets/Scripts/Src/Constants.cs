@@ -13,5 +13,8 @@ namespace HangmanHero
 
         public const string wordsXMLpath = "Data/words";
         public const string textUIruPath = "Data/Text/TextUI_ru";
+
+        // Debug configs 
+        public const bool currentWordDebugLog = false;
     }
 }

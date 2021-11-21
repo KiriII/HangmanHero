@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace HangmanHero
@@ -19,7 +18,7 @@ namespace HangmanHero
         {
             var haveLetter = false;
 
-            for (int i = word.IndexOf(letter); i > -1; i = word.IndexOf(letter, i + 1))  
+            for (int i = word.IndexOf(letter); i > -1; i = word.IndexOf(letter, i + 1))
             {
 
                 if (!openChars.Contains(i))
@@ -37,21 +36,19 @@ namespace HangmanHero
         {
             if (openChars.Count == word.Length)
             {
-                //Debug.Log("true");
                 return true;
             }
-            //Debug.Log("false"); 
             return false;
         }
 
-        public void Reset() 
+        public void Reset()
         {
             openChars.Clear();
         }
 
         // getters 
 
-        public ArrayList GetOpenChars()   
+        public ArrayList GetOpenChars()
         {
             return openChars;
         }
@@ -64,7 +61,10 @@ namespace HangmanHero
         public void SetWord(string word)
         {
             this.word = word;
-            Debug.Log($"psssst word is {word}");    //  debug
+            if (Constants.currentWordDebugLog)
+            {
+                Debug.Log($"Current word is {word}");
+            }
         }
     }
 }

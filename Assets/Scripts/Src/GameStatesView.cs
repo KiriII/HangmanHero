@@ -1,12 +1,13 @@
 ﻿using System.Collections;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 namespace HangmanHero
 {
     public class GameStatesView : HangmanElement
     {
-        private TurnsController turnsController;
+        private ViewsController viewsController;
+
         private TextsModel textsModel;
 
         private GameObject stateGame;
@@ -28,20 +29,20 @@ namespace HangmanHero
         private ArrayList lettersItemsList;
         private ArrayList errorsImages;
 
-        public GameStatesView(ArrayList alphabet, TurnsController turnsController, GameStartController gameStartController)
+        public GameStatesView(ArrayList alphabet, ViewsController viewsController)
         {
-            this.turnsController = turnsController;
+            this.viewsController = viewsController;
             textsModel = app.textsModel;
 
             lettersItemsList = new ArrayList();
             errorsImages = new ArrayList();
-            
+
             InitGameObjects();
             SetTextes();
             CreateKeyboard(alphabet);
             UpdateScore(0, 0);
 
-            buttonRestart.GetComponent<Button>().onClick.AddListener(() => gameStartController.GameStart());
+            buttonRestart.GetComponent<Button>().onClick.AddListener(() => viewsController.GameStartButtonPressed());
         }
 
         public void StartGame(int wordLenght)
@@ -92,7 +93,7 @@ namespace HangmanHero
                 var newKeyboardItem = Instantiate(keyboardItem, keyboardList);
 
                 var key = newKeyboardItem.GetComponent<Button>();
-                key.onClick.AddListener(() => turnsController.Turn((char)letter));
+                key.onClick.AddListener(() => viewsController.TurnsButtonPressed((char)letter));
 
                 newKeyboardItem.transform.GetChild(0).gameObject.GetComponent<Text>().text = letter.ToString(); // bad need to change. like construct mb?
                 newKeyboardItem.SetActive(true);
@@ -120,7 +121,7 @@ namespace HangmanHero
             {
                 var newLetterItem = Instantiate(letterItem, letterList);
 
-                newLetterItem.transform.GetChild(1).gameObject.GetComponent<Text>().text = "_"; // bad need to change. like construct mb?
+                newLetterItem.transform.GetChild(1).gameObject.GetComponent<Text>().text = textsModel.GetTextByKey("unknownLetter"); // bad need to change. like construct mb?
                 newLetterItem.SetActive(true);
 
                 lettersItemsList.Add(newLetterItem);
@@ -129,18 +130,30 @@ namespace HangmanHero
 
         public void UpdateWord(ArrayList openWords, string word)
         {
-            foreach (var letterNumber in openWords)
+            foreach (int letterNumber in openWords)
             {
-                var letterGameObject = (GameObject)lettersItemsList[(int)letterNumber];    // bad
-                letterGameObject.transform.GetChild(1).gameObject.GetComponent<Text>().text = word[(int)letterNumber].ToString(); // bad need to change. like construct mb?
+                var letterGameObject = (GameObject)lettersItemsList[letterNumber];    // bad
+                letterGameObject.transform.GetChild(1).gameObject.GetComponent<Text>().text = word[letterNumber].ToString(); // bad need to change. like construct mb?
             }
+        }
+
+        public void OpenAllLetters(string word)
+        {
+            var lettersIndex = new ArrayList();
+
+            for (int i = 0; i < word.Length; i++)
+            {
+                lettersIndex.Add(i);
+            }
+
+            UpdateWord(lettersIndex, word);
         }
 
         public void ClearWordView()
         {
-            foreach (var letterItem in lettersItemsList)
+            foreach (GameObject letterItem in lettersItemsList)
             {
-                Destroy((GameObject)letterItem);
+                Destroy(letterItem);
             }
             lettersItemsList.Clear();
         }
@@ -158,10 +171,11 @@ namespace HangmanHero
             foreach (GameObject image in errorsImages)
             {
                 image.SetActive(false);
-            }   
+            }
         }
 
         // -------------------Score----------------------------
+
         public void UpdateScore(int wins, int loses)
         {
             var scoreText = textsModel.GetTextByKey("score");

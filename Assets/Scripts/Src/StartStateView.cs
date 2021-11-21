@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.UI;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace HangmanHero
 {
     public class StartStateView : HangmanElement
     {
+        private ViewsController viewsController;
+
         private TextsModel textsModel;
 
         private GameObject stateStart;
@@ -17,8 +17,10 @@ namespace HangmanHero
 
         private GameObject buttonStart;
 
-        public StartStateView(GameStartController gameStartController)
+        public StartStateView(ViewsController viewsController)
         {
+            this.viewsController = viewsController;
+
             textsModel = app.textsModel;
 
             InitGameObjects();
@@ -26,7 +28,7 @@ namespace HangmanHero
 
             buttonStart.GetComponent<Button>().onClick.AddListener(() =>
                 {
-                    gameStartController.GameStart();
+                    viewsController.GameStartButtonPressed();
                     DisableScreen();
                 });
         }

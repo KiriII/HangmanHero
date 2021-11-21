@@ -1,18 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace HangmanHero
+﻿namespace HangmanHero
 {
     public class EndGameController : HangmanElement
     {
+        private ViewsController viewsController;
 
         private ScoreModel scoreModel;
         private CurrentWordModel currentWordModel;
         private ErrorsModel errorsModel;
 
-        public EndGameController(CurrentWordModel currentWordModel, ErrorsModel errorsModel)
+        public EndGameController(CurrentWordModel currentWordModel, ErrorsModel errorsModel, ViewsController viewsController)
         {
+            this.viewsController = viewsController;
             this.currentWordModel = currentWordModel;
             this.errorsModel = errorsModel;
 
@@ -21,21 +19,22 @@ namespace HangmanHero
 
         public void GameEnd()
         {
+            bool won = false; 
+
             if (currentWordModel.CheckGameWon())
             {
                 scoreModel.Win();
-                app.won = true;
-                ModelsReset();
+                won = true;
             }
             else if (!errorsModel.AreErrorsLeft())
             {
                 scoreModel.Lose();
-                app.won = false;
-                ModelsReset();
+                won = false;
             }
 
-            app.gameStartController.hangmanStartController.gameStatesView.DisableKeyboard(app.won); // bad. need to change
-            app.gameStartController.hangmanStartController.gameStatesView.UpdateScore(scoreModel.GetWins(), scoreModel.GetLoses()); // bad. need to change
+            viewsController.GameEndViewRedraw(scoreModel.GetWins(), scoreModel.GetLoses(), won, currentWordModel.GetWord());
+
+            ModelsReset();
         }
 
         private void ModelsReset()

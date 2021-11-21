@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace HangmanHero
+﻿namespace HangmanHero
 {
     public class ErrorsModel
     {
@@ -25,10 +21,8 @@ namespace HangmanHero
         {
             if (maxErrors - currentErrors == -1)
             {
-                //Debug.Log("false");
                 return false;
             }
-            //Debug.Log("true");
             return true;
         }
 

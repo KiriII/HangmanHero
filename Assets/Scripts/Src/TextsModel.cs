@@ -13,6 +13,7 @@ namespace HangmanHero
             texts = textJSONReader.GetTexts();
         }
 
+        // getters
         public string GetTextByKey(string key)
         {
             var text = "";

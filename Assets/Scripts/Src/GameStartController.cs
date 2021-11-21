@@ -1,46 +1,36 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
 
 namespace HangmanHero
 {
-    public class GameStartController 
-    { 
-        public HangmanStartController hangmanStartController; // better be private
+    public class GameStartController
+    {
+        private ViewsController viewsController;
 
         private GameModel gameModel;
         private CurrentWordModel currentWordModel;
-
-        private StartStateView startStateView;
 
         public GameStartController()
         {
             gameModel = new GameModel();
             currentWordModel = new CurrentWordModel();
-            hangmanStartController = new HangmanStartController(currentWordModel, this);
 
-            startStateView = new StartStateView(this);
- 
-            //Debug.Log($"The game has begun!");
+            viewsController = new ViewsController(this, currentWordModel);
         }
 
-        public void GameStart(bool won = false)   // вызывается в input
+        public void GameStart(bool won = false)
         {
             var word = currentWordModel.GetWord();
 
             if (won)
             {
-                gameModel.RemoveUsedWord(word); 
+                gameModel.RemoveUsedWord(word);
 
             }
 
-            Debug.Log($"Оставшиеся неодгаданные слова: {string.Join(", ", gameModel.getUnusedWords().Cast<string>().ToArray())}");
-
-            // check words not empty
+            // Debug.Log($"Оставшиеся неодгаданные слова: {string.Join(", ", gameModel.getUnusedWords().Cast<string>().ToArray())}");
 
             currentWordModel.SetWord(RandomWord(word));
-            hangmanStartController.StartHangmanGame();
+            viewsController.StartGameViewUpdate(currentWordModel.GetWord().Length);
         }
 
         private string RandomWord(string word)
@@ -48,7 +38,7 @@ namespace HangmanHero
             var words = new ArrayList(gameModel.getUnusedWords());   // unused words, not all
             words.Remove(word);
 
-            Debug.Log($"Оставшиеся неодгаданные неповторяющиеся слова: {string.Join(", ", words.Cast<string>().ToArray())}");
+            // Debug.Log($"Оставшиеся неодгаданные неповторяющиеся слова: {string.Join(", ", words.Cast<string>().ToArray())}");
 
             System.Random rnd = new System.Random();
             return (string)words[rnd.Next(words.Count)];

@@ -1,24 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace HangmanHero
+﻿namespace HangmanHero
 {
-    public class TurnsController 
+    public class TurnsController
     {
         private EndGameController endGameController;
+        private ViewsController viewsController;
 
         private CurrentWordModel currentWordModel;
         private ErrorsModel errorsModel;
 
-        private GameStatesView gameStatesView;
-
-        public TurnsController(CurrentWordModel currentWordModel)
+        public TurnsController(CurrentWordModel currentWordModel, ViewsController viewsController)
         {
             this.currentWordModel = currentWordModel;
+            this.viewsController = viewsController;
             errorsModel = new ErrorsModel();
 
-            endGameController = new EndGameController(this.currentWordModel, errorsModel);
+            endGameController = new EndGameController(this.currentWordModel, errorsModel, viewsController);
         }
 
         public void Turn(char letter)
@@ -27,25 +23,19 @@ namespace HangmanHero
 
             if (openedWord)
             {
-                gameStatesView.UpdateWord(currentWordModel.GetOpenChars(), currentWordModel.GetWord());
+                viewsController.WordViewUpdate(currentWordModel.GetOpenChars(), currentWordModel.GetWord());
             }
             else
             {
                 var errors = errorsModel.ErrorDone();
 
-                gameStatesView.UpdateHangman(errors - 1);
+                viewsController.HangmanViewUpdate(errors - 1);
             }
 
             if (currentWordModel.CheckGameWon() == errorsModel.AreErrorsLeft())
             {
                 endGameController.GameEnd();
             }
-        }
-
-        // КОСТЫЛЬ 
-        public void SetGameStateView(GameStatesView gameStatesView)
-        {
-            this.gameStatesView = gameStatesView;
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace HangmanHero
 {
     public class HangmanStartController : HangmanElement
-    {
+    {/*
         private TurnsController turnsController;
 
         public CurrentWordModel currentWordModel;
@@ -13,20 +13,20 @@ namespace HangmanHero
 
         public GameStatesView gameStatesView; // better be private
 
-        public HangmanStartController(CurrentWordModel currentWordModel, GameStartController gameStartController)
+        public HangmanStartController(CurrentWordModel currentWordModel)
         {
             this.currentWordModel = currentWordModel;
             turnsController = new TurnsController(this.currentWordModel);
 
             alphabetModel = new AlphabetModel();
 
-            gameStatesView = new GameStatesView(alphabetModel.GetAlphabet(), turnsController, gameStartController);
+            gameStatesView = new GameStatesView(alphabetModel.GetAlphabet(), turnsController);
             turnsController.SetGameStateView(gameStatesView);  // КОСТЫЛЬ
         }
 
         public void StartHangmanGame()
         {
             gameStatesView.StartGame(currentWordModel.GetWord().Length);
-        }
+        }*/
     }
 }

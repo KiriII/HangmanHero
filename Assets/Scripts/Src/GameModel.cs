@@ -1,9 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace HangmanHero
 {
+    // Actualy better call it's like WordsListModel
     public class GameModel
     {
         private ArrayList allKnownWords;
@@ -13,13 +12,13 @@ namespace HangmanHero
         {
             var wordXMLParser = new WordsXMLParser();
 
-            allKnownWords = wordXMLParser.GetAllKnownWords(); 
-            unusedWords = new ArrayList(allKnownWords);
-
+            allKnownWords = wordXMLParser.GetAllKnownWords();
             if (!CheckDataNotNull(allKnownWords))
             {
                 throw new System.Exception("Ошибка при чтении входных данных");
             }
+
+            unusedWords = new ArrayList(allKnownWords);
         }
 
         public void RemoveUsedWord(string word)
