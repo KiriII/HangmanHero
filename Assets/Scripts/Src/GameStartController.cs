@@ -32,7 +32,7 @@ namespace HangmanHero
 
             currentWordModel.SetWord(RandomWord(word));
 
-            if (word == currentWordModel.GetWord())
+            if (word == currentWordModel.GetWord() && gameModel.getUnusedWords().Count > 1)
             {
                 throw new System.Exception("Ошибка при рандомировании нового слова");
             }
@@ -43,6 +43,11 @@ namespace HangmanHero
         private string RandomWord(string word)
         {
             var words = new ArrayList(gameModel.getUnusedWords());   // unused words, not all
+            if (words.Count == 1)
+            {
+                return (string)words[0];
+            }
+
             words.Remove(word);
 
             //Debug.Log($"Оставшиеся неодгаданные неповторяющиеся слова: {string.Join(", ", words.Cast<string>().ToArray())}");
