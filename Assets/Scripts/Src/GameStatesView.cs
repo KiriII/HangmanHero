@@ -8,7 +8,7 @@ namespace HangmanHero
     {
         private ViewsController viewsController;
 
-        private TextsModel textsModel;
+        private ITextModel textsModel;
 
         private GameObject stateGame;
 

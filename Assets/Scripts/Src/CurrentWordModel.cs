@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace HangmanHero
 {
-    public class CurrentWordModel
+    public class CurrentWordModel : ICurrentWordModel
     {
 
         private ArrayList openChars;

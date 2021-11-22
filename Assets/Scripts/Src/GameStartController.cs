@@ -8,8 +8,8 @@ namespace HangmanHero
     {
         private ViewsController viewsController;
 
-        private GameModel gameModel;
-        private CurrentWordModel currentWordModel;
+        private IWordsListModel gameModel;
+        private ICurrentWordModel currentWordModel;
 
         public GameStartController()
         {

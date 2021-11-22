@@ -2,7 +2,7 @@
 
 namespace HangmanHero
 {
-    public class TextsModel
+    public class TextsModel : ITextModel
     {
         private Dictionary<string, string> texts;
 

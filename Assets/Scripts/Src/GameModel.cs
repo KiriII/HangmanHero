@@ -3,7 +3,7 @@
 namespace HangmanHero
 {
     // Actualy better call it's like WordsListModel
-    public class GameModel
+    public class GameModel : IWordsListModel
     {
         private ArrayList allKnownWords;
         private ArrayList unusedWords;

@@ -5,10 +5,10 @@
         private EndGameController endGameController;
         private ViewsController viewsController;
 
-        private CurrentWordModel currentWordModel;
-        private ErrorsModel errorsModel;
+        private ICurrentWordModel currentWordModel;
+        private IErrorsModel errorsModel;
 
-        public TurnsController(CurrentWordModel currentWordModel, ViewsController viewsController)
+        public TurnsController(ICurrentWordModel currentWordModel, ViewsController viewsController)
         {
             this.currentWordModel = currentWordModel;
             this.viewsController = viewsController;

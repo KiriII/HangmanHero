@@ -9,14 +9,14 @@ namespace HangmanHero
         private GameStartController gameStartController;
         private TurnsController turnsController;
 
-        private AlphabetModel alphabetModel;
+        private IAlphabetModel alphabetModel;
 
         private GameStatesView gameStatesView;
         private StartStateView startStateView;
 
         private bool won;
 
-        public ViewsController(GameStartController gameStartController, CurrentWordModel currentWordModel)
+        public ViewsController(GameStartController gameStartController, ICurrentWordModel currentWordModel)
         {
             this.gameStartController = gameStartController;
 

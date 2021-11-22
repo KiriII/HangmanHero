@@ -7,7 +7,7 @@ namespace HangmanHero
     {
         private ViewsController viewsController;
 
-        private TextsModel textsModel;
+        private ITextModel textsModel;
 
         private GameObject stateStart;
 
@@ -31,17 +31,18 @@ namespace HangmanHero
                     viewsController.GameStartButtonPressed();
                     DisableScreen();
                 });
+
+            stateStart.SetActive(true);
         }
 
         private void InitGameObjects()
         {
-            stateStart = app.mainUI.transform.GetChild(0).GetChild(1).GetChild(0).gameObject; // baad
-            stateStart.SetActive(true);
+            stateStart = GameObjectFinder.FindObject(app.mainUI, "StateStart"); 
 
-            txtHead = app.mainUI.transform.GetChild(0).GetChild(0).gameObject;
-            txtRules = stateStart.transform.GetChild(0).GetChild(0).gameObject;
-            buttonStart = stateStart.transform.GetChild(2).gameObject;
-            txtButtonStart = buttonStart.transform.GetChild(0).gameObject;
+            txtHead = app.mainUI.GetComponentsInChildren<Text>()[0].gameObject;
+            txtRules = stateStart.GetComponentsInChildren<Text>()[0].gameObject;
+            buttonStart = stateStart.GetComponentsInChildren<Button>()[0].gameObject;
+            txtButtonStart = buttonStart.GetComponentsInChildren<Text>()[0].gameObject;
         }
 
         private void SetTextes()

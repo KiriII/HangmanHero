@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace HangmanHero
 {
-    public class AlphabetModel
+    public class AlphabetModel : IAlphabetModel
     {
         private ArrayList alphabet;
 
@@ -14,6 +14,10 @@ namespace HangmanHero
 
             GetRussianAlphabet(ref alphabet);
             
+            if (alphabet.Count == 0)
+            {
+                throw new System.Exception("Ошибка при создании алфавита");
+            }
         }
 
         private void GetRussianAlphabet(ref ArrayList alphabet)

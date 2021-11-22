@@ -1,34 +1,37 @@
-﻿public class ScoreModel
+﻿namespace HangmanHero
 {
-
-    private int wins;
-    private int loses;
-
-    public ScoreModel()
+    public class ScoreModel : IScoreModel
     {
-        wins = 0;
-        loses = 0;
-    }
 
-    public void Win()
-    {
-        wins++;
-    }
+        private int wins;
+        private int loses;
 
-    public void Lose()
-    {
-        loses++;
-    }
+        public ScoreModel()
+        {
+            wins = 0;
+            loses = 0;
+        }
 
-    // getters 
+        public void Win()
+        {
+            wins++;
+        }
 
-    public int GetWins()
-    {
-        return wins;
-    }
+        public void Lose()
+        {
+            loses++;
+        }
 
-    public int GetLoses()
-    {
-        return loses;
+        // getters 
+
+        public int GetWins()
+        {
+            return wins;
+        }
+
+        public int GetLoses()
+        {
+            return loses;
+        }
     }
 }

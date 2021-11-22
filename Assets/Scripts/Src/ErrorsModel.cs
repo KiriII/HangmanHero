@@ -1,6 +1,6 @@
 ﻿namespace HangmanHero
 {
-    public class ErrorsModel
+    public class ErrorsModel : IErrorsModel
     {
 
         private int currentErrors;

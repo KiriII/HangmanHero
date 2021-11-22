@@ -8,7 +8,7 @@ namespace HangmanHero
         public GameObject mainUI;
 
         public GameStartController gameStartController;
-        public TextsModel textsModel;
+        public ITextModel textsModel;
 
         private void Start()
         {

@@ -4,11 +4,11 @@
     {
         private ViewsController viewsController;
 
-        private ScoreModel scoreModel;
-        private CurrentWordModel currentWordModel;
-        private ErrorsModel errorsModel;
+        private IScoreModel scoreModel;
+        private ICurrentWordModel currentWordModel;
+        private IErrorsModel errorsModel;
 
-        public EndGameController(CurrentWordModel currentWordModel, ErrorsModel errorsModel, ViewsController viewsController)
+        public EndGameController(ICurrentWordModel currentWordModel, IErrorsModel errorsModel, ViewsController viewsController)
         {
             this.viewsController = viewsController;
             this.currentWordModel = currentWordModel;
