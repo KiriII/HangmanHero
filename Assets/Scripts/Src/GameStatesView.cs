@@ -54,6 +54,7 @@ namespace HangmanHero
             ClearHangman();
         }
 
+        // Need to do it better
         private void InitGameObjects()
         {
             stateGame = GameObjectFinder.FindObject(app.mainUI, "StateGame");
@@ -94,7 +95,7 @@ namespace HangmanHero
 
                 newKeyboardItem.GetComponent<Button>().onClick.AddListener(() => viewsController.TurnsButtonPressed((char)letter));
 
-                newKeyboardItem.GetComponentsInChildren<Text>()[0].text = letter.ToString(); // bad need to change. like construct mb?
+                newKeyboardItem.GetComponentsInChildren<Text>()[0].text = letter.ToString();
                 newKeyboardItem.SetActive(true);
             }
         }
@@ -120,7 +121,7 @@ namespace HangmanHero
             {
                 var newLetterItem = Instantiate(letterItem, letterList);
 
-                newLetterItem.GetComponentsInChildren<Text>()[0].text = textsModel.GetTextByKey("unknownLetter"); // bad need to change. like construct mb?
+                newLetterItem.GetComponentsInChildren<Text>()[0].text = textsModel.GetTextByKey("unknownLetter"); 
                 newLetterItem.SetActive(true);
 
                 lettersItemsList.Add(newLetterItem);
@@ -131,8 +132,8 @@ namespace HangmanHero
         {
             foreach (int letterNumber in openWords)
             {
-                var letterGameObject = (GameObject)lettersItemsList[letterNumber];    // bad
-                letterGameObject.GetComponentsInChildren<Text>()[0].text = word[letterNumber].ToString(); // bad need to change. like construct mb?
+                var letterGameObject = (GameObject)lettersItemsList[letterNumber];   
+                letterGameObject.GetComponentsInChildren<Text>()[0].text = word[letterNumber].ToString(); 
             }
         }
 
