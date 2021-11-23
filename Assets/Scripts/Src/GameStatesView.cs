@@ -29,6 +29,20 @@ namespace HangmanHero
         private ArrayList lettersItemsList;
         private ArrayList errorsImages;
 
+        private const string startGameObjectName = "StateGame";
+        private const string gameStateKeyboardObjectName = "GameStateKeyboard";
+        private const string letterListObjectName = "LetterList";
+        private const string hangmanObjectName = "Hangman";
+        private const string txtStatusObjectName = "TxtStatus";
+        private const string gameStateRestartObjectName = "GameStateRestart";
+
+        //text keys
+        private const string buttonGameRestartKey = "buttonGameRestart";
+        private const string winTextKey = "winText";
+        private const string loseTextKey = "loseText";
+        private const string unknownLetterKey = "unknownLetter";
+        private const string scoreKey = "score";
+
         public GameStatesView(ArrayList alphabet, ViewsController viewsController)
         {
             this.viewsController = viewsController;
@@ -57,21 +71,21 @@ namespace HangmanHero
         // Need to do it better
         private void InitGameObjects()
         {
-            stateGame = GameObjectFinder.FindObject(app.mainUI, "StateGame");
+            stateGame = GameObjectFinder.FindObject(app.mainUI, startGameObjectName);
 
-            keyboardList = GameObjectFinder.FindObject(stateGame, "GameStateKeyboard").transform;
+            keyboardList = GameObjectFinder.FindObject(stateGame, gameStateKeyboardObjectName).transform;
             keyboardItem = keyboardList.GetComponentsInChildren<Button>()[0].gameObject;
             keyboardItem.SetActive(false);
 
-            letterList = GameObjectFinder.FindObject(stateGame, "LetterList").transform;
+            letterList = GameObjectFinder.FindObject(stateGame, letterListObjectName).transform;
             letterItem = letterList.GetChild(0).gameObject;
             letterItem.SetActive(false);
 
-            hangman = GameObjectFinder.FindObject(stateGame, "Hangman").transform; 
+            hangman = GameObjectFinder.FindObject(stateGame, hangmanObjectName).transform; 
 
-            score = GameObjectFinder.FindObject(stateGame, "TxtStatus");
+            score = GameObjectFinder.FindObject(stateGame, txtStatusObjectName);
 
-            gameStateRestart = GameObjectFinder.FindObject(stateGame, "GameStateRestart"); 
+            gameStateRestart = GameObjectFinder.FindObject(stateGame, gameStateRestartObjectName); 
             txtGameOver = gameStateRestart.GetComponentsInChildren<Text>()[0].gameObject;
             buttonRestart = gameStateRestart.GetComponentsInChildren<Button>()[0].gameObject;
 
@@ -83,7 +97,7 @@ namespace HangmanHero
 
         private void SetTextes()
         {
-            buttonRestart.GetComponentsInChildren<Text>()[0].text = textsModel.GetTextByKey("buttonGameRestart");
+            buttonRestart.GetComponentsInChildren<Text>()[0].text = textsModel.GetTextByKey(buttonGameRestartKey);
         }
 
         // -------------------keyboard----------------------------
@@ -109,7 +123,7 @@ namespace HangmanHero
         public void DisableKeyboard(bool won)
         {
             keyboardList.gameObject.SetActive(false);
-            txtGameOver.GetComponent<Text>().text = won ? textsModel.GetTextByKey("winText") : textsModel.GetTextByKey("loseText");
+            txtGameOver.GetComponent<Text>().text = won ? textsModel.GetTextByKey(winTextKey) : textsModel.GetTextByKey(loseTextKey);
             gameStateRestart.SetActive(true);
         }
 
@@ -121,7 +135,7 @@ namespace HangmanHero
             {
                 var newLetterItem = Instantiate(letterItem, letterList);
 
-                newLetterItem.GetComponentsInChildren<Text>()[0].text = textsModel.GetTextByKey("unknownLetter"); 
+                newLetterItem.GetComponentsInChildren<Text>()[0].text = textsModel.GetTextByKey(unknownLetterKey); 
                 newLetterItem.SetActive(true);
 
                 lettersItemsList.Add(newLetterItem);
@@ -178,7 +192,7 @@ namespace HangmanHero
 
         public void UpdateScore(int wins, int loses)
         {
-            var scoreText = textsModel.GetTextByKey("score");
+            var scoreText = textsModel.GetTextByKey(scoreKey);
             scoreText = scoreText.Replace("{wins}", wins.ToString());
             scoreText = scoreText.Replace("{loses}", loses.ToString());
             score.GetComponent<Text>().text = scoreText;

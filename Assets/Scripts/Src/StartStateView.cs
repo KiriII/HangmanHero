@@ -17,6 +17,13 @@ namespace HangmanHero
 
         private GameObject buttonStart;
 
+        private const string stateStartObjectName = "StateStart";
+
+        //text keys
+        private const string headTextKey = "head";
+        private const string buttonStartTextKey = "buttonGameStart";
+        private const string rulesTextKey = "rules";
+
         public StartStateView(ViewsController viewsController)
         {
             this.viewsController = viewsController;
@@ -37,7 +44,7 @@ namespace HangmanHero
 
         private void InitGameObjects()
         {
-            stateStart = GameObjectFinder.FindObject(app.mainUI, "StateStart"); 
+            stateStart = GameObjectFinder.FindObject(app.mainUI, stateStartObjectName); 
 
             txtHead = app.mainUI.GetComponentsInChildren<Text>()[0].gameObject;
             txtRules = stateStart.GetComponentsInChildren<Text>()[0].gameObject;
@@ -47,9 +54,9 @@ namespace HangmanHero
 
         private void SetTextes()
         {
-            txtHead.GetComponent<Text>().text = textsModel.GetTextByKey("head");
-            txtButtonStart.GetComponent<Text>().text = textsModel.GetTextByKey("buttonGameStart");
-            txtRules.GetComponent<Text>().text = textsModel.GetTextByKey("rules");
+            txtHead.GetComponent<Text>().text = textsModel.GetTextByKey(headTextKey);
+            txtButtonStart.GetComponent<Text>().text = textsModel.GetTextByKey(buttonStartTextKey);
+            txtRules.GetComponent<Text>().text = textsModel.GetTextByKey(rulesTextKey);
         }
 
 
