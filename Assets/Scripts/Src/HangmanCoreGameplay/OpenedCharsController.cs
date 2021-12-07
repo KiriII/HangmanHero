@@ -15,13 +15,13 @@ namespace Src.HangmanCoreGameplay
         {
             var wordInGame = _gameCoreModel.GetWordInGame();
             
-            for (int i = wordInGame.IndexOf(symbolInTurn); i > -1; i = wordInGame.IndexOf(symbolInTurn, i + 1))
+            for (var i = wordInGame.IndexOf(symbolInTurn); i > -1; i = wordInGame.IndexOf(symbolInTurn, i + 1))
             {
                 if (!_gameCoreModel.IsSymbolIndexOpened(i))
                 {
                     _gameCoreModel.AddOpenedSymbolIndex(i);
                 }
             }
-        } 
+        }
     }
 }

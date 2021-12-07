@@ -1,5 +1,3 @@
-using System;
-
 namespace Src.HangmanCoreGameplay
 {
     internal class ErrorsController : ITurnsGroupChangedListener
@@ -11,9 +9,9 @@ namespace Src.HangmanCoreGameplay
             _gameCoreModel = gameCoreModel;
         }
 
-        public void UpdateValuesAfterTurn(char symbolInTurn)
+        public void UpdateValuesAfterTurn(char turnSymbol)
         {
-            if (!_gameCoreModel.IsTurnInWord(symbolInTurn))
+            if (!_gameCoreModel.IsTurnSymbolInWord(turnSymbol))
             {
                 _gameCoreModel.IncrementErrorsCount();
             }
