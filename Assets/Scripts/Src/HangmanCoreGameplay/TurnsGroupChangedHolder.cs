@@ -6,14 +6,16 @@ namespace Src.HangmanCoreGameplay
     public class TurnsGroupChangedHolder
     {
         private event Action<char> _turnGroupChanged;
-        private List<ITurnsGroupChangedListener> turnsGroupChangedListeners;
+        private List<ITurnsGroupChangedListener> _turnsGroupChangedListeners;
 
         public TurnsGroupChangedHolder(params ITurnsGroupChangedListener[] listeners)
         {
+            _turnsGroupChangedListeners = new List<ITurnsGroupChangedListener>();
+            
             foreach (var listener in listeners)
             {
                 EnableListener(listener);
-                turnsGroupChangedListeners.Add(listener);
+                _turnsGroupChangedListeners.Add(listener);
             }
         }
 

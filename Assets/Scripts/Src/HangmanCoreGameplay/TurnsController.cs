@@ -16,7 +16,7 @@ namespace Src.HangmanCoreGameplay
 
         public void TurnResultCalculation(char symbolInTurn)
         {
-            if (!CheckSymbolInTurnsGroup(symbolInTurn)) return;
+            if (CheckSymbolInTurnsGroup(symbolInTurn)) return;
             AddTurn(symbolInTurn);
 
             _turnsGroupChangedHolder.OnTurnGroupChanged(symbolInTurn);

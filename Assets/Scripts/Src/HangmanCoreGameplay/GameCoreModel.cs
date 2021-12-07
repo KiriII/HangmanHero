@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Src.HangmanCoreGameplay
@@ -30,7 +31,7 @@ namespace Src.HangmanCoreGameplay
 
         public bool IsTurnSymbolInWord(char turn)
         {
-            return _wordInGame.IndexOf(turn) == SYMBOL_NOT_FOUND_KEY;
+            return _wordInGame.IndexOf(turn) != SYMBOL_NOT_FOUND_KEY;
         }
 
         public bool IsSymbolIndexOpened(int symbolIndex)
@@ -41,6 +42,13 @@ namespace Src.HangmanCoreGameplay
         public void IncrementErrorsCount()
         {
             _errorsCount++;
+        }
+        
+        //-------setters--------
+
+        public void SetWord(string word)
+        {
+            _wordInGame = word;
         }
         
         //-------getters--------
@@ -56,6 +64,16 @@ namespace Src.HangmanCoreGameplay
         public string GetWordInGame()
         {
             return _wordInGame;
+        }
+        
+        //-------debug------
+
+        public string Print()
+        {
+            return $"word is {_wordInGame}\n" +
+                   $"errors count = {_errorsCount}\n" +
+                   $"opened symbols: {String.Join(", ", _openedSymbolsInWord)}\n" +
+                   $"turns: {String.Join(", ", _turnsDone)}";
         }
     }
 }

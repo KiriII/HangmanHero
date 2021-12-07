@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Src.HangmanCoreGameplay
 {
     public class HangmanGameCore
@@ -22,6 +24,17 @@ namespace Src.HangmanCoreGameplay
         public void Turn(char inputSymbol)
         {
             _turnsController.TurnResultCalculation(inputSymbol);
+        }
+
+        public void SetWord(string word)
+        {
+            _gameCoreModel.SetWord(word);
+        }
+
+        // -------debug---------
+        public void PrintModelState()
+        {
+            Debug.Log(_gameCoreModel.Print());
         }
     }
 }
