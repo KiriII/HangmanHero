@@ -5,19 +5,22 @@ namespace Src.HangmanCoreGameplay
     internal class TurnsController
     {
         private GameCoreModel _gameCoreModel;
-        private event Action<char> _onUniqTurnDone;
+        private TurnsGroupChangedHolder _turnsGroupChangedHolder;
 
-        public TurnsController(GameCoreModel gameCoreModel)
+        public TurnsController(GameCoreModel gameCoreModel, TurnsGroupChangedHolder turnsGroupChangedHolder)
         {
             _gameCoreModel = gameCoreModel;
+
+            _turnsGroupChangedHolder = turnsGroupChangedHolder;
         }
+
         public void TurnResultCalculation(char symbolInTurn)
         {
             if (CheckSymbolInTurnsGroup(symbolInTurn))
             {
                 AddTurn(symbolInTurn);
 
-                OnOnUniqTurnDone(symbolInTurn);
+                _turnsGroupChangedHolder.OnTurnGroupChanged(symbolInTurn);
             }
         }
 
@@ -31,16 +34,6 @@ namespace Src.HangmanCoreGameplay
         private void AddTurn(char turn)
         {
             _gameCoreModel.AddTurn(turn);
-        }
-
-        protected virtual void OnOnUniqTurnDone(char symbolInTurn)
-        {
-            _onUniqTurnDone?.Invoke(symbolInTurn);
-        }
-
-        public Action<char> GetAction()
-        {
-            return _onUniqTurnDone;
         }
     }
 }

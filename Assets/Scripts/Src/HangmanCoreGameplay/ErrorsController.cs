@@ -2,23 +2,18 @@ using System;
 
 namespace Src.HangmanCoreGameplay
 {
-    internal class ErrorsController
+    internal class ErrorsController : ITurnsGroupChangedListener
     {
-        private Action<char> _onUniqTurnDone;
-
         private GameCoreModel _gameCoreModel;
 
-        public ErrorsController(GameCoreModel gameCoreModel, Action<char> onUniqTurnDone)
+        public ErrorsController(GameCoreModel gameCoreModel)
         {
             _gameCoreModel = gameCoreModel;
-            _onUniqTurnDone = onUniqTurnDone;
-
-            _onUniqTurnDone += CheckErrorDone;
         }
 
-        private void CheckErrorDone(char symbolInTurn)
+        public void UpdateValuesAfterTurn(char symbolInTurn)
         {
-            if (_gameCoreModel.IsTurnInWord(symbolInTurn))
+            if (!_gameCoreModel.IsTurnInWord(symbolInTurn))
             {
                 _gameCoreModel.IncrementErrorsCount();
             }

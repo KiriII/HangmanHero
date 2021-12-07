@@ -2,28 +2,22 @@ using System;
 
 namespace Src.HangmanCoreGameplay
 {
-    internal class OpenedCharsController
+    internal class OpenedCharsController : ITurnsGroupChangedListener
     {
-        private Action<char> _onUniqTurnDone;
-        
         private GameCoreModel _gameCoreModel;
 
-        public OpenedCharsController(GameCoreModel gameCoreModel, Action<char> onUniqTurnDone)
+        public OpenedCharsController(GameCoreModel gameCoreModel)
         {
             _gameCoreModel = gameCoreModel;
-            
-            _onUniqTurnDone = onUniqTurnDone;
-
-            _onUniqTurnDone += CheckCharOpened;
         }
 
-        private void CheckCharOpened(char symbolInTurn)
+        public void UpdateValuesAfterTurn(char symbolInTurn)
         {
             var wordInGame = _gameCoreModel.GetWordInGame();
             
             for (int i = wordInGame.IndexOf(symbolInTurn); i > -1; i = wordInGame.IndexOf(symbolInTurn, i + 1))
             {
-                if (_gameCoreModel.IsSymbolIndexOpened(i))
+                if (!_gameCoreModel.IsSymbolIndexOpened(i))
                 {
                     _gameCoreModel.AddOpenedSymbolIndex(i);
                 }
