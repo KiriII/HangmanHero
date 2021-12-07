@@ -16,17 +16,10 @@ namespace Src.HangmanCoreGameplay
 
         public void TurnResultCalculation(char symbolInTurn)
         {
-            if (CheckSymbolInTurnsGroup(symbolInTurn)) return;
+            if (_gameCoreModel.IsSymbolInTurns(symbolInTurn)) return;
             AddTurn(symbolInTurn);
 
             _turnsGroupChangedHolder.OnTurnGroupChanged(symbolInTurn);
-        }
-
-        private bool CheckSymbolInTurnsGroup(char symbolInTurn)
-        {
-            var turnsDone= _gameCoreModel.GetTurnsDone();
-
-            return turnsDone.Contains(symbolInTurn);
         }
 
         private void AddTurn(char turn)

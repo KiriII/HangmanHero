@@ -38,6 +38,11 @@ namespace Src.HangmanCoreGameplay
         {
             return _openedSymbolsInWord.Contains(symbolIndex);
         }
+        
+        public bool IsSymbolInTurns(char symbolInTurn)
+        {
+            return _turnsDone.Contains(symbolInTurn);
+        }
 
         public void IncrementErrorsCount()
         {
