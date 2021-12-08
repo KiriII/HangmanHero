@@ -23,11 +23,16 @@ namespace Src.HangmanCoreGameplay
 
         public void Turn(char inputSymbol)
         {
+            // check not special symbol or space 
             _turnsController.TurnResultCalculation(inputSymbol);
         }
 
         public void SetWord(string word)
         {
+            if (word?.Length == 0)
+            {
+                throw new System.Exception("Word length equals zero");
+            }
             _gameCoreModel.SetWord(word);
         }
 
