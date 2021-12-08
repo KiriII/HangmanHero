@@ -17,23 +17,36 @@ namespace Src.HangmanCoreGameplay
             _errorsContoller = new ErrorsController(_gameCoreModel);
             _openedCharsController = new OpenedCharsController(_gameCoreModel);
 
-            _turnsController = new TurnsController(_gameCoreModel, 
-                new TurnsGroupChangedHolder(_errorsContoller, _openedCharsController));
+            var turnsGroupChangedHolder =
+                new TurnsGroupChangedHolder(_errorsContoller, _openedCharsController);
+            _turnsController = new TurnsController(_gameCoreModel, turnsGroupChangedHolder);
         }
 
         public void Turn(char inputSymbol)
         {
-            // check not special symbol or space 
+            CheckInputSymbol(inputSymbol);
+                
             _turnsController.TurnResultCalculation(inputSymbol);
         }
 
         public void SetWord(string word)
         {
+            CheckInputWord(word);
+            
+            _gameCoreModel.SetWord(word);
+        }
+
+        private void CheckInputWord(string word)
+        {
             if (word?.Length == 0)
             {
                 throw new System.Exception("Word length equals zero");
             }
-            _gameCoreModel.SetWord(word);
+        }
+
+        private void CheckInputSymbol(char symbol)
+        {
+            // TO DO
         }
 
         // -------debug---------

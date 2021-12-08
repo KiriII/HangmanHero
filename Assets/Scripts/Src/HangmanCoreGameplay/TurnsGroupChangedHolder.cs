@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 namespace Src.HangmanCoreGameplay
 {
-    public class TurnsGroupChangedHolder
+    internal class TurnsGroupChangedHolder
     {
         private event Action<char> _turnGroupChanged;
         private List<ITurnsGroupChangedListener> _turnsGroupChangedListeners;
