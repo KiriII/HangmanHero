@@ -33,5 +33,10 @@ namespace Src.HangmanCoreGameplay
         {
             _turnGroupChanged?.Invoke(symbol);
         }
+
+        public Action<char> GetTurnGroupChanged()
+        {
+            return _turnGroupChanged;
+        }
     }
 }

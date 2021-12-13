@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Src.HangmanCoreGameplay
 {
-    internal class GameCoreModel
+    public class GameCoreModel
     {
         private const int SYMBOL_NOT_FOUND_KEY = -1;
         
@@ -12,8 +12,10 @@ namespace Src.HangmanCoreGameplay
         private List<int> _openedSymbolsInWord;
         private HashSet<char> _turnsDone;
 
-        public GameCoreModel()
+        public GameCoreModel(string wordForGame)
         {
+            _wordInGame = wordForGame;
+            
             _errorsCount = 0;
             _openedSymbolsInWord = new List<int>();
             _turnsDone = new HashSet<char>();

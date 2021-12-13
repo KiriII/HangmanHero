@@ -21,10 +21,8 @@ public class CoreGameplayEditorWindow : EditorWindow
 
         if (GUILayout.Button("RESET"))
         {
-            _hangmanGameCore = new HangmanGameCore();
-            
-            _hangmanGameCore.SetWord(_word);
-            
+            _hangmanGameCore = new HangmanGameCore(_word);
+
             _hangmanGameCore.PrintModelState();
         }
         
