@@ -2,9 +2,9 @@ namespace Src.HangmanCoreGameplay
 {
     internal class ErrorsController : ITurnsGroupChangedListener
     {
-        private GameCoreModel _gameCoreModel;
+        private IGameCoreModel _gameCoreModel;
 
-        public ErrorsController(GameCoreModel gameCoreModel)
+        public ErrorsController(IGameCoreModel gameCoreModel)
         {
             _gameCoreModel = gameCoreModel;
         }

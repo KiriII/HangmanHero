@@ -4,9 +4,9 @@ namespace Src.HangmanCoreGameplay
 {
     internal class OpenedCharsController : ITurnsGroupChangedListener
     {
-        private GameCoreModel _gameCoreModel;
+        private IGameCoreModel _gameCoreModel;
 
-        public OpenedCharsController(GameCoreModel gameCoreModel)
+        public OpenedCharsController(IGameCoreModel gameCoreModel)
         {
             _gameCoreModel = gameCoreModel;
         }

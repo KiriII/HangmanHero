@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Src.HangmanCoreGameplay
 {
-    public class HangmanGameCore
+    public class HangmanGameCore : IHangmanGameCore, IHangmanGameCoreData
     {
         private TurnsController _turnsController;
         private ITurnsGroupChangedListener _errorsContoller;
@@ -38,6 +38,19 @@ namespace Src.HangmanCoreGameplay
         public void Turn(char inputSymbol)
         {
             _turnsController.TurnResultCalculation(inputSymbol);
+        }
+        
+        public bool IsHiddenWorldOpened()
+        {
+            var wordLenght = _gameCoreModel.GetWordLenght();
+            var openedCharsCount = _gameCoreModel.GetOpenedCharsCount();
+            
+            return wordLenght == openedCharsCount;
+        }
+
+        public int GetErrorsCount()
+        {
+            return _gameCoreModel.GetErrorsCount();
         }
 
         // -------debug---------

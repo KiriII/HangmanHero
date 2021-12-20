@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Src.HangmanCoreGameplay
 {
-    public class GameCoreModel
+    public class GameCoreModel : IGameCoreModel, ITurnsModel
     {
         private const int SYMBOL_NOT_FOUND_KEY = -1;
         
@@ -26,9 +26,9 @@ namespace Src.HangmanCoreGameplay
             _turnsDone.Add(turn);
         }
 
-        public void AddOpenedSymbolIndex(int simbolIndex)
+        public void AddOpenedSymbolIndex(int symbolIndex)
         {
-            _openedSymbolsInWord.Add(simbolIndex);
+            _openedSymbolsInWord.Add(symbolIndex);
         }
 
         public bool IsTurnSymbolInWord(char turn)
@@ -72,7 +72,17 @@ namespace Src.HangmanCoreGameplay
         {
             return _wordInGame;
         }
-        
+
+        public int GetWordLenght()
+        {
+            return _wordInGame.Length;
+        }
+
+        public int GetOpenedCharsCount()
+        {
+            return _openedSymbolsInWord.Count;
+        }
+
         //-------debug------
 
         public string Print()
