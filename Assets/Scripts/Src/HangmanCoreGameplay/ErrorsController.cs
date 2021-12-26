@@ -1,8 +1,12 @@
+using System;
+using UnityEngine;
+
 namespace Src.HangmanCoreGameplay
 {
     internal class ErrorsController : ITurnsGroupChangedListener
     {
         private IGameCoreModel _gameCoreModel;
+        public event Action _errorsCountChanged;
 
         public ErrorsController(IGameCoreModel gameCoreModel)
         {
@@ -14,7 +18,18 @@ namespace Src.HangmanCoreGameplay
             if (!_gameCoreModel.IsTurnSymbolInWord(turnSymbol))
             {
                 _gameCoreModel.IncrementErrorsCount();
+                OnErrorsCountChanged();
             }
+        }
+        
+        private void OnErrorsCountChanged()
+        {
+            _errorsCountChanged?.Invoke();
+        }
+
+        public Action GetErrorsCountChanged()
+        {
+            return _errorsCountChanged;
         }
     }
 }

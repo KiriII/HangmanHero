@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Src.HangmanCoreGameplay
@@ -5,8 +6,8 @@ namespace Src.HangmanCoreGameplay
     public class HangmanGameCore : IHangmanGameCore, IHangmanGameCoreData
     {
         private TurnsController _turnsController;
-        private ITurnsGroupChangedListener _errorsContoller;
-        private ITurnsGroupChangedListener _openedCharsController;
+        private ErrorsController _errorsContoller;
+        private OpenedCharsController _openedCharsController;
         
         private GameCoreModel _gameCoreModel;
 
@@ -40,7 +41,7 @@ namespace Src.HangmanCoreGameplay
             _turnsController.TurnResultCalculation(inputSymbol);
         }
         
-        public bool IsHiddenWorldOpened()
+        public bool IsHiddenWordOpened()
         {
             var wordLenght = _gameCoreModel.GetWordLenght();
             var openedCharsCount = _gameCoreModel.GetOpenedCharsCount();
@@ -52,6 +53,17 @@ namespace Src.HangmanCoreGameplay
         {
             return _gameCoreModel.GetErrorsCount();
         }
+
+        public Action GetOpenedSymbolsGroupChanged()
+        {
+            return _openedCharsController.GetOpenedSymbolsGroupChanged();
+        }
+
+        public Action GetErrorsCountChanged()
+        {
+            return _errorsContoller.GetErrorsCountChanged();
+        }
+
 
         // -------debug---------
         public void PrintModelState()

@@ -5,6 +5,7 @@ namespace Src.HangmanCoreGameplay
     internal class OpenedCharsController : ITurnsGroupChangedListener
     {
         private IGameCoreModel _gameCoreModel;
+        public event Action _openedSymbolsGroupChanged;
 
         public OpenedCharsController(IGameCoreModel gameCoreModel)
         {
@@ -20,8 +21,19 @@ namespace Src.HangmanCoreGameplay
                 if (!_gameCoreModel.IsSymbolIndexOpened(i))
                 {
                     _gameCoreModel.AddOpenedSymbolIndex(i);
+                    OnOpenSymbolsGroupChaged();
                 }
             }
+        }
+        
+        private void OnOpenSymbolsGroupChaged()
+        {
+            _openedSymbolsGroupChanged?.Invoke();
+        }
+
+        public Action GetOpenedSymbolsGroupChanged()
+        {
+            return _openedSymbolsGroupChanged;
         }
     }
 }
