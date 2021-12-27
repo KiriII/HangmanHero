@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Object = System.Object;
 
 namespace Src.HangmanCoreGameplay
 {
@@ -27,9 +28,9 @@ namespace Src.HangmanCoreGameplay
             _errorsCountChanged?.Invoke();
         }
 
-        public Action GetErrorsCountChanged()
+        public void SetErrorsCountChanged(Action methodInListener)
         {
-            return _errorsCountChanged;
+            _errorsCountChanged = methodInListener;
         }
     }
 }

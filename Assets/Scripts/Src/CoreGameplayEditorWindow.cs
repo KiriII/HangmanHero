@@ -35,7 +35,7 @@ public class CoreGameplayEditorWindow : EditorWindow
 
             _hangmanGameCore.PrintModelState();
             
-            _hangmanGamesStatistic.StartNewGame();
+            _hangmanGamesStatistic.StartNewGame(_hangmanGameCore);
         }
         
         if (GUILayout.Button("MAKE TURN"))

@@ -16,27 +16,22 @@ namespace Src.HangmanGameResult
 
             AddActionsListeners(hangmanGameCoreData);
         }
-
-        //BAD
+        
         private void AddActionsListeners(IHangmanGameCoreData hangmanGameCoreData)
         {
-            var openedSymbolsGroupChanged = hangmanGameCoreData.GetOpenedSymbolsGroupChanged();
-            Debug.Log(hangmanGameCoreData.GetOpenedSymbolsGroupChanged() == null);
-            openedSymbolsGroupChanged += _gameStatisticController.CalculateGameResultAfterWordOpened;
-            Debug.Log(hangmanGameCoreData.GetOpenedSymbolsGroupChanged() == null);
-            
-            var errorsCountChanged = hangmanGameCoreData.GetErrorsCountChanged();
-            errorsCountChanged += _gameStatisticController.CalculateGameResultAfterErrorDone;
+            hangmanGameCoreData.SetOpenedSymbolsGroupChanged(_gameStatisticController.CalculateGameResultAfterWordOpened);
+            hangmanGameCoreData.SetErrorsCountChanged(_gameStatisticController.CalculateGameResultAfterErrorDone);
         }
         
-        public void StartNewGame()
+        public void StartNewGame(IHangmanGameCoreData hangmanGameCoreData)
         {
             _gamesStatisticModel.AddGameToStatisticWithState(HangmanGameState.GameInProgress);
+            _gameStatisticController = new GameStatisticController(_gamesStatisticModel, hangmanGameCoreData);
+            AddActionsListeners(hangmanGameCoreData);
         }
 
         public int GetWinsCount()
         {
-            Debug.Log($"{String.Join(", ", _gamesStatisticModel.GetGamesStatistic())}");
             return _gamesStatisticModel.GetGamesCountWithState(HangmanGameState.Victory);
         }
 

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Object = System.Object;
 
 namespace Src.HangmanCoreGameplay
 {
@@ -49,19 +50,19 @@ namespace Src.HangmanCoreGameplay
             return wordLenght == openedCharsCount;
         }
 
-        public int GetErrorsCount()
+        public bool IsErrorsRunOut()
         {
-            return _gameCoreModel.GetErrorsCount();
+            return _gameCoreModel.IsErrorsRunOut();
         }
 
-        public Action GetOpenedSymbolsGroupChanged()
+        public void SetOpenedSymbolsGroupChanged(Action methodInListener)
         {
-            return _openedCharsController.GetOpenedSymbolsGroupChanged();
+            _openedCharsController.SetOpenedSymbolsGroupChanged(methodInListener);
         }
 
-        public Action GetErrorsCountChanged()
+        public void SetErrorsCountChanged(Action methodInListener)
         {
-            return _errorsContoller.GetErrorsCountChanged();
+            _errorsContoller.SetErrorsCountChanged(methodInListener);
         }
 
 

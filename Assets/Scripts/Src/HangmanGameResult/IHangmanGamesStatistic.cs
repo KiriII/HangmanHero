@@ -1,8 +1,10 @@
+using Src.HangmanCoreGameplay;
+
 namespace Src.HangmanGameResult
 {
     public interface IHangmanGamesStatistic
     {
-        void StartNewGame();
+        void StartNewGame(IHangmanGameCoreData hangmanGameCoreData);
         
         int GetWinsCount();
 

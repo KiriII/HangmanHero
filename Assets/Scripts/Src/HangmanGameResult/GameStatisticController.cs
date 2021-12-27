@@ -5,9 +5,6 @@ namespace Src.HangmanGameResult
 {
     public class GameStatisticController
     {
-        //TODO REMOVE
-        private const int MAX_ERRORS_COUNT = 6;
-        
         private IGamesStatisticModel _gamesStatisticModel;
         private IHangmanGameCoreData _hangmanGameCoreData;
 
@@ -20,10 +17,8 @@ namespace Src.HangmanGameResult
 
         public void CalculateGameResultAfterWordOpened()
         {
-            Debug.Log("TRY CHECK GAME WON");
             if (IsGameWined())
             {
-                Debug.Log("GAME WON");
                 UpdateStatistic(HangmanGameState.Victory);
             } 
         }
@@ -44,8 +39,8 @@ namespace Src.HangmanGameResult
 
         private bool IsGameFailed()
         {
-            var errorsDoneInCurrentGame = _hangmanGameCoreData.GetErrorsCount();
-            return errorsDoneInCurrentGame == MAX_ERRORS_COUNT;
+            var errorsRunOut = _hangmanGameCoreData.IsErrorsRunOut();
+            return errorsRunOut;
         }
 
         private void UpdateStatistic(HangmanGameState hangmanGameState)

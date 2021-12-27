@@ -24,7 +24,7 @@ namespace Src.HangmanGameResult
         public void FinishLastInGroupGame(HangmanGameState gameState)
         {
             var countOfGames = _hangmanGamesStatistic.Count;
-            _hangmanGamesStatistic[countOfGames] = gameState;
+            _hangmanGamesStatistic[countOfGames - 1] = gameState;
         }
 
         public List<HangmanGameState> GetGamesStatistic()
