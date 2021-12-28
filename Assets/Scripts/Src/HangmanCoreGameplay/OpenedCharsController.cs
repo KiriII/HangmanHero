@@ -28,12 +28,12 @@ namespace Src.HangmanCoreGameplay
         
         private void OnOpenSymbolsGroupChaged()
         {
-            _openedSymbolsGroupChanged.Invoke();
+            _openedSymbolsGroupChanged?.Invoke();
         }
 
         public void SetOpenedSymbolsGroupChanged(Action methodInListener)
         {
-            _openedSymbolsGroupChanged = methodInListener;
+            _openedSymbolsGroupChanged += methodInListener;
         }
     }
 }

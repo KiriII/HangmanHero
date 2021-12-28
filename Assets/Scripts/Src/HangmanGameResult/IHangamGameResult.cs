@@ -1,13 +1,12 @@
+using System;
 using Src.HangmanCoreGameplay;
 
 namespace Src.HangmanGameResult
 {
-    public interface IHangmanGamesStatistic
+    public interface IHangamGameResult
     {
         void StartNewGame(IHangmanGameCoreData hangmanGameCoreData);
 
-        int GetWinsCount();
-
-        int GetLosesCount();
+        void SetGameStateChanged(Action<HangmanGameFinishedState> methodInListener);
     }
 }

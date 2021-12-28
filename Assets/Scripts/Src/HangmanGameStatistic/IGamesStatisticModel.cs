@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Src.HangmanGameResult
+namespace Src.HangmanGameStatistic
 {
     public interface IGamesStatisticModel
     {

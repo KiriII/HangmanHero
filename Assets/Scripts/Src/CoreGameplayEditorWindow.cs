@@ -2,6 +2,7 @@ using System;
 using UnityEditor;
 using Src.HangmanCoreGameplay;
 using Src.HangmanGameResult;
+using Src.HangmanGameStatistic;
 using UnityEngine;
 
 public class CoreGameplayEditorWindow : EditorWindow
@@ -11,6 +12,7 @@ public class CoreGameplayEditorWindow : EditorWindow
 
     private static HangmanGameCore _hangmanGameCore;
     private static IHangmanGamesStatistic _hangmanGamesStatistic;
+    private static IHangamGameResult _hangamGameResult;
     
     [MenuItem("HangmanHero/CoreTest")]
     public static void ShowWindow()
@@ -24,7 +26,9 @@ public class CoreGameplayEditorWindow : EditorWindow
         {
             _hangmanGameCore = new HangmanGameCore(_word);
 
-            _hangmanGamesStatistic = new HangmanGamesStatistic(_hangmanGameCore);
+            _hangamGameResult = new HangmanGameResult(_hangmanGameCore);
+
+            _hangmanGamesStatistic = new HangmanGamesStatistic(_hangamGameResult);
         }
         
         _word = EditorGUILayout.TextField("word", _word);
@@ -35,7 +39,7 @@ public class CoreGameplayEditorWindow : EditorWindow
 
             _hangmanGameCore.PrintModelState();
             
-            _hangmanGamesStatistic.StartNewGame(_hangmanGameCore);
+            _hangamGameResult.StartNewGame(_hangmanGameCore);
         }
         
         if (GUILayout.Button("MAKE TURN"))

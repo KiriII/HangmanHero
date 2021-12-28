@@ -16,11 +16,9 @@ namespace Src.HangmanCoreGameplay
 
         public void UpdateValuesAfterTurn(char turnSymbol)
         {
-            if (!_gameCoreModel.IsTurnSymbolInWord(turnSymbol))
-            {
-                _gameCoreModel.IncrementErrorsCount();
-                OnErrorsCountChanged();
-            }
+            if (_gameCoreModel.IsTurnSymbolInWord(turnSymbol)) return;
+            _gameCoreModel.IncrementErrorsCount();
+            OnErrorsCountChanged();
         }
         
         private void OnErrorsCountChanged()
@@ -30,7 +28,7 @@ namespace Src.HangmanCoreGameplay
 
         public void SetErrorsCountChanged(Action methodInListener)
         {
-            _errorsCountChanged = methodInListener;
+            _errorsCountChanged += methodInListener;
         }
     }
 }

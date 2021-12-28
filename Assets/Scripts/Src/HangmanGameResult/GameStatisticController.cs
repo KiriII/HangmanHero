@@ -1,3 +1,4 @@
+using System;
 using Src.HangmanCoreGameplay;
 using UnityEngine;
 
@@ -5,21 +6,19 @@ namespace Src.HangmanGameResult
 {
     public class GameStatisticController
     {
-        private IGamesStatisticModel _gamesStatisticModel;
         private IHangmanGameCoreData _hangmanGameCoreData;
+        public event Action<HangmanGameFinishedState> _gameStateChanged;
 
-        public GameStatisticController(IGamesStatisticModel gamesStatisticModel,
-            IHangmanGameCoreData hangmanGameCoreData)
+        public GameStatisticController(IHangmanGameCoreData hangmanGameCoreData)
         {
-            _gamesStatisticModel = gamesStatisticModel;
-            _hangmanGameCoreData = hangmanGameCoreData;
+            SetHangmanGameCoreData(hangmanGameCoreData);
         }
 
         public void CalculateGameResultAfterWordOpened()
         {
             if (IsGameWined())
             {
-                UpdateStatistic(HangmanGameFinishedState.Victory);
+                OnGameStateChanged(HangmanGameFinishedState.Victory);
             } 
         }
         
@@ -33,7 +32,7 @@ namespace Src.HangmanGameResult
         {
             if (IsGameFailed())
             {
-                UpdateStatistic(HangmanGameFinishedState.Failed);
+                OnGameStateChanged(HangmanGameFinishedState.Failed);
             } 
         }
 
@@ -42,10 +41,20 @@ namespace Src.HangmanGameResult
             var errorsRunOut = _hangmanGameCoreData.IsErrorsRunOut();
             return errorsRunOut;
         }
-
-        private void UpdateStatistic(HangmanGameFinishedState hangmanGameFinishedState)
+        
+        private void OnGameStateChanged(HangmanGameFinishedState hangmanGameFinishedState)
         {
-            _gamesStatisticModel.AddGameToStatisticWithState(hangmanGameFinishedState);
+            _gameStateChanged?.Invoke(hangmanGameFinishedState);
+        }
+        
+        public void SetGameStateChanged(Action<HangmanGameFinishedState> methodInListener)
+        {
+            _gameStateChanged += methodInListener;
+        }
+
+        public void SetHangmanGameCoreData(IHangmanGameCoreData hangmanGameCoreData)
+        {
+            _hangmanGameCoreData = hangmanGameCoreData;
         }
     }
 }

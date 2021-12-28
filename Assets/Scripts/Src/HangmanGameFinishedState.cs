@@ -1,4 +1,4 @@
-﻿public enum HangmanGameFinishedState
+public enum HangmanGameFinishedState
 {
     Failed,
     Victory
