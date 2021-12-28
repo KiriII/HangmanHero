@@ -22,22 +22,21 @@ namespace Src.HangmanGameResult
             hangmanGameCoreData.SetOpenedSymbolsGroupChanged(_gameStatisticController.CalculateGameResultAfterWordOpened);
             hangmanGameCoreData.SetErrorsCountChanged(_gameStatisticController.CalculateGameResultAfterErrorDone);
         }
-        
+
         public void StartNewGame(IHangmanGameCoreData hangmanGameCoreData)
         {
-            _gamesStatisticModel.AddGameToStatisticWithState(HangmanGameState.GameInProgress);
             _gameStatisticController = new GameStatisticController(_gamesStatisticModel, hangmanGameCoreData);
             AddActionsListeners(hangmanGameCoreData);
         }
 
         public int GetWinsCount()
         {
-            return _gamesStatisticModel.GetGamesCountWithState(HangmanGameState.Victory);
+            return _gamesStatisticModel.GetGamesCountWithState(HangmanGameFinishedState.Victory);
         }
 
         public int GetLosesCount()
         {
-            return _gamesStatisticModel.GetGamesCountWithState(HangmanGameState.Failed);
+            return _gamesStatisticModel.GetGamesCountWithState(HangmanGameFinishedState.Failed);
         }
     }
 }

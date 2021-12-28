@@ -19,7 +19,7 @@ namespace Src.HangmanGameResult
         {
             if (IsGameWined())
             {
-                UpdateStatistic(HangmanGameState.Victory);
+                UpdateStatistic(HangmanGameFinishedState.Victory);
             } 
         }
         
@@ -33,7 +33,7 @@ namespace Src.HangmanGameResult
         {
             if (IsGameFailed())
             {
-                UpdateStatistic(HangmanGameState.Failed);
+                UpdateStatistic(HangmanGameFinishedState.Failed);
             } 
         }
 
@@ -43,9 +43,9 @@ namespace Src.HangmanGameResult
             return errorsRunOut;
         }
 
-        private void UpdateStatistic(HangmanGameState hangmanGameState)
+        private void UpdateStatistic(HangmanGameFinishedState hangmanGameFinishedState)
         {
-            _gamesStatisticModel.FinishLastInGroupGame(hangmanGameState);
+            _gamesStatisticModel.AddGameToStatisticWithState(hangmanGameFinishedState);
         }
     }
 }

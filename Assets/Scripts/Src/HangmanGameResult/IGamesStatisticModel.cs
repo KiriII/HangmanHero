@@ -4,12 +4,10 @@ namespace Src.HangmanGameResult
 {
     public interface IGamesStatisticModel
     {
-        void AddGameToStatisticWithState(HangmanGameState gameState);
+        void AddGameToStatisticWithState(HangmanGameFinishedState gameFinishedState);
 
-        void FinishLastInGroupGame(HangmanGameState gameState);
-
-        int GetGamesCountWithState(HangmanGameState gameState);
+        int GetGamesCountWithState(HangmanGameFinishedState gameFinishedState);
         
-        List<HangmanGameState> GetGamesStatistic();
+        List<HangmanGameFinishedState> GetGamesStatistic();
     }
 }
