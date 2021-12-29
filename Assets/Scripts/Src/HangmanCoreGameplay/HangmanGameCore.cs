@@ -50,9 +50,9 @@ namespace Src.HangmanCoreGameplay
             return wordLenght == openedCharsCount;
         }
 
-        public bool IsErrorsRunOut()
+        public int GetErrorsCount()
         {
-            return _gameCoreModel.IsErrorsRunOut();
+            return _gameCoreModel.GetErrorsCount();
         }
 
         public void SetOpenedSymbolsGroupChanged(Action methodInListener)

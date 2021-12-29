@@ -5,6 +5,7 @@ namespace Src.HangmanGameResult
 {
     public class HangmanGameResult : IHangamGameResult
     {
+        private IGameResultModel _gameResultModel;
         private GameStatisticController _gameStatisticController;
 
         public HangmanGameResult(IHangmanGameCoreData hangmanGameCoreData)

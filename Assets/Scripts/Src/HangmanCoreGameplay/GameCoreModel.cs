@@ -6,7 +6,6 @@ namespace Src.HangmanCoreGameplay
     public class GameCoreModel : IGameCoreModel, ITurnsModel
     {
         private const int SYMBOL_NOT_FOUND_KEY = -1;
-        private const int MAX_ERRORS_COUNT = 6;
         
         private string _wordInGame;
         private int _errorsCount;
@@ -45,11 +44,6 @@ namespace Src.HangmanCoreGameplay
         public bool IsSymbolInTurns(char symbolInTurn)
         {
             return _turnsDone.Contains(symbolInTurn);
-        }
-
-        public bool IsErrorsRunOut()
-        {
-            return MAX_ERRORS_COUNT < _errorsCount;
         }
         
         public void IncrementErrorsCount()

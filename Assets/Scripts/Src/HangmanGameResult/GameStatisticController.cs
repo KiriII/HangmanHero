@@ -7,10 +7,12 @@ namespace Src.HangmanGameResult
     public class GameStatisticController
     {
         private IHangmanGameCoreData _hangmanGameCoreData;
+        private IGameResultModel _gameResultModel;
         public event Action<HangmanGameFinishedState> _gameStateChanged;
 
         public GameStatisticController(IHangmanGameCoreData hangmanGameCoreData)
         {
+            _gameResultModel = new GameResultModel();
             SetHangmanGameCoreData(hangmanGameCoreData);
         }
 
@@ -38,7 +40,8 @@ namespace Src.HangmanGameResult
 
         private bool IsGameFailed()
         {
-            var errorsRunOut = _hangmanGameCoreData.IsErrorsRunOut();
+            var currentErrorsCount = _hangmanGameCoreData.GetErrorsCount();
+            var errorsRunOut = _gameResultModel.IsErrorsRunOut(currentErrorsCount);
             return errorsRunOut;
         }
         
