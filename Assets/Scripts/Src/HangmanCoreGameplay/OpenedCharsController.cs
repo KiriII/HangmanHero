@@ -21,19 +21,24 @@ namespace Src.HangmanCoreGameplay
                 if (!_gameCoreModel.IsSymbolIndexOpened(i))
                 {
                     _gameCoreModel.AddOpenedSymbolIndex(i);
-                    OnOpenSymbolsGroupChaged();
+                    OnOpenSymbolsGroupChanged();
                 }
             }
         }
         
-        private void OnOpenSymbolsGroupChaged()
+        private void OnOpenSymbolsGroupChanged()
         {
             _openedSymbolsGroupChanged?.Invoke();
         }
 
-        public void SetOpenedSymbolsGroupChanged(Action methodInListener)
+        public void EnableOpenedSymbolsGroupChangedListener(Action methodInListener)
         {
             _openedSymbolsGroupChanged += methodInListener;
+        }
+        
+        public void DisableOpenedSymbolsGroupChangedListener(Action methodInListener)
+        {
+            _openedSymbolsGroupChanged -= methodInListener;
         }
     }
 }

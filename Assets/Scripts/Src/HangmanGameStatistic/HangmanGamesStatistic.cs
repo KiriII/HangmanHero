@@ -5,15 +5,15 @@ namespace Src.HangmanGameStatistic
 {
     public class HangmanGamesStatistic : IHangmanGamesStatistic
     {
-        private IGamesStatisticModel _gamesStatisticModel;
+        private HangmanStatisticModel _gamesStatisticModel;
 
         public HangmanGamesStatistic(IHangamGameResult hangamGameResult)
         {
             _gamesStatisticModel = new HangmanStatisticModel();
-            hangamGameResult.SetGameStateChanged(UpdateStatistic);
+            hangamGameResult.EnableGameStateChangedListener(UpdateStatistic);
         }
 
-        public void UpdateStatistic(HangmanGameFinishedState hangmanGameFinishedState)
+        private void UpdateStatistic(HangmanGameFinishedState hangmanGameFinishedState)
         {
             _gamesStatisticModel.AddGameToStatisticWithState(hangmanGameFinishedState);
         }

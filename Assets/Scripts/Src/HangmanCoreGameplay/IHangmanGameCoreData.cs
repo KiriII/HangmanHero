@@ -6,9 +6,13 @@ namespace Src.HangmanCoreGameplay
     {
         bool IsHiddenWordOpened();
 
-        void SetOpenedSymbolsGroupChanged(Action methodInListener);
+        void EnableOpenedSymbolsGroupChangedListener(Action methodInListener);
+        
+        void DisableOpenedSymbolsGroupChangedListener(Action methodInListener);
 
-        void SetErrorsCountChanged(Action methodInListener);
+        void EnableErrorsCountChangedListener(Action methodInListener);
+        
+        void DisableErrorsCountChangedListener(Action methodInListener);
 
         int GetErrorsCount();
     }

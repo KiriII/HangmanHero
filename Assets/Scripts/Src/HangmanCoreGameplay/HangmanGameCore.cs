@@ -55,14 +55,24 @@ namespace Src.HangmanCoreGameplay
             return _gameCoreModel.GetErrorsCount();
         }
 
-        public void SetOpenedSymbolsGroupChanged(Action methodInListener)
+        public void EnableOpenedSymbolsGroupChangedListener(Action methodInListener)
         {
-            _openedCharsController.SetOpenedSymbolsGroupChanged(methodInListener);
+            _openedCharsController.EnableOpenedSymbolsGroupChangedListener(methodInListener);
         }
 
-        public void SetErrorsCountChanged(Action methodInListener)
+        public void DisableOpenedSymbolsGroupChangedListener(Action methodInListener)
         {
-            _errorsContoller.SetErrorsCountChanged(methodInListener);
+            _openedCharsController.DisableOpenedSymbolsGroupChangedListener(methodInListener);
+        }
+        
+        public void EnableErrorsCountChangedListener(Action methodInListener)
+        {
+            _errorsContoller.EnableErrorsCountChangedListener(methodInListener);
+        }
+        
+        public void DisableErrorsCountChangedListener(Action methodInListener)
+        {
+            _errorsContoller.DisableErrorsCountChangedListener(methodInListener);
         }
 
 

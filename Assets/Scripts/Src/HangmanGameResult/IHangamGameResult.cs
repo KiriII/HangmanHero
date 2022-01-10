@@ -7,6 +7,8 @@ namespace Src.HangmanGameResult
     {
         void StartNewGame(IHangmanGameCoreData hangmanGameCoreData);
 
-        void SetGameStateChanged(Action<HangmanGameFinishedState> methodInListener);
+        void EnableGameStateChangedListener(Action<HangmanGameFinishedState> methodInListener);
+        
+        void DisableGameStateChangedListener(Action<HangmanGameFinishedState> methodInListener);
     }
 }

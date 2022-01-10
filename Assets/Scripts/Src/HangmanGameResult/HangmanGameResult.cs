@@ -5,30 +5,34 @@ namespace Src.HangmanGameResult
 {
     public class HangmanGameResult : IHangamGameResult
     {
-        private IGameResultModel _gameResultModel;
-        private GameStatisticController _gameStatisticController;
+        private GameResultModel _gameResultModel;
+        private GameResultController _gameStatisticController;
 
         public HangmanGameResult(IHangmanGameCoreData hangmanGameCoreData)
         {
-            _gameStatisticController = new GameStatisticController(hangmanGameCoreData);
-
-            AddActionsListeners(hangmanGameCoreData);
+            StartNewGame(hangmanGameCoreData);
         }
-        private void AddActionsListeners(IHangmanGameCoreData hangmanGameCoreData)
-        {
-            hangmanGameCoreData.SetOpenedSymbolsGroupChanged(_gameStatisticController.CalculateGameResultAfterWordOpened);
-            hangmanGameCoreData.SetErrorsCountChanged(_gameStatisticController.CalculateGameResultAfterErrorDone);
-        }
-
+        
         public void StartNewGame(IHangmanGameCoreData hangmanGameCoreData)
         {
             _gameStatisticController.SetHangmanGameCoreData(hangmanGameCoreData);
             AddActionsListeners(hangmanGameCoreData);
         }
-
-        public void SetGameStateChanged(Action<HangmanGameFinishedState> methodInListener)
+        
+        private void AddActionsListeners(IHangmanGameCoreData hangmanGameCoreData)
         {
-            _gameStatisticController.SetGameStateChanged(methodInListener);
+            hangmanGameCoreData.EnableOpenedSymbolsGroupChangedListener(_gameStatisticController.CalculateGameResultAfterWordOpened);
+            hangmanGameCoreData.EnableErrorsCountChangedListener(_gameStatisticController.CalculateGameResultAfterErrorDone);
+        }
+
+        public void EnableGameStateChangedListener(Action<HangmanGameFinishedState> methodInListener)
+        {
+            _gameStatisticController.EnableGameStateChangedListener(methodInListener);
+        }
+        
+        public void DisableGameStateChangedListener(Action<HangmanGameFinishedState> methodInListener)
+        {
+            _gameStatisticController.DisableGameStateChangedListener(methodInListener);
         }
     }
 }

@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Src.HangmanGameStatistic
 {
-    public class HangmanStatisticModel : IGamesStatisticModel
+    public class HangmanStatisticModel
     {
-        private List<HangmanGameFinishedState> _hangmanGamesStatistic;
+        private readonly List<HangmanGameFinishedState> _hangmanGamesStatistic;
 
         public HangmanStatisticModel()
         {
@@ -13,7 +14,7 @@ namespace Src.HangmanGameStatistic
 
         public HangmanStatisticModel(List<HangmanGameFinishedState> hangmanGamesStatistic)
         {
-            _hangmanGamesStatistic = hangmanGamesStatistic;
+            _hangmanGamesStatistic = new List<HangmanGameFinishedState>(hangmanGamesStatistic);
         }
         
         public void AddGameToStatisticWithState(HangmanGameFinishedState gameFinishedState)
@@ -21,15 +22,14 @@ namespace Src.HangmanGameStatistic
             _hangmanGamesStatistic.Add(gameFinishedState);
         }
 
-        public List<HangmanGameFinishedState> GetGamesStatistic()
+        public IReadOnlyList<HangmanGameFinishedState> GetGamesStatistic()
         {
             return _hangmanGamesStatistic;
         }
         
         public int GetGamesCountWithState(HangmanGameFinishedState gameFinishedState)
         {
-            var gamesWithState = _hangmanGamesStatistic.FindAll(state => state == gameFinishedState);
-            var countThisTypeOfGames = gamesWithState.Count;
+            var countThisTypeOfGames = _hangmanGamesStatistic.Count(state => state == gameFinishedState);
             return countThisTypeOfGames;
         }
     }

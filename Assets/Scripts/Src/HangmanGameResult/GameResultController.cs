@@ -1,19 +1,23 @@
 using System;
 using Src.HangmanCoreGameplay;
-using UnityEngine;
 
 namespace Src.HangmanGameResult
 {
-    public class GameStatisticController
+    public class GameResultController
     {
         private IHangmanGameCoreData _hangmanGameCoreData;
-        private IGameResultModel _gameResultModel;
+        private GameResultModel _gameResultModel;
         public event Action<HangmanGameFinishedState> _gameStateChanged;
 
-        public GameStatisticController(IHangmanGameCoreData hangmanGameCoreData)
+        public GameResultController(IHangmanGameCoreData hangmanGameCoreData)
         {
             _gameResultModel = new GameResultModel();
             SetHangmanGameCoreData(hangmanGameCoreData);
+        }
+        
+        public void SetHangmanGameCoreData(IHangmanGameCoreData hangmanGameCoreData)
+        {
+            _hangmanGameCoreData = hangmanGameCoreData;
         }
 
         public void CalculateGameResultAfterWordOpened()
@@ -50,14 +54,14 @@ namespace Src.HangmanGameResult
             _gameStateChanged?.Invoke(hangmanGameFinishedState);
         }
         
-        public void SetGameStateChanged(Action<HangmanGameFinishedState> methodInListener)
+        public void EnableGameStateChangedListener(Action<HangmanGameFinishedState> methodInListener)
         {
             _gameStateChanged += methodInListener;
         }
 
-        public void SetHangmanGameCoreData(IHangmanGameCoreData hangmanGameCoreData)
+        public void DisableGameStateChangedListener(Action<HangmanGameFinishedState> methodInListener)
         {
-            _hangmanGameCoreData = hangmanGameCoreData;
+            _gameStateChanged -= methodInListener;
         }
     }
 }

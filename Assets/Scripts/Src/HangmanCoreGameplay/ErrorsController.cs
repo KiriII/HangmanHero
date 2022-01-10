@@ -26,9 +26,15 @@ namespace Src.HangmanCoreGameplay
             _errorsCountChanged?.Invoke();
         }
 
-        public void SetErrorsCountChanged(Action methodInListener)
+        public void EnableErrorsCountChangedListener(Action methodInListener)
         {
             _errorsCountChanged += methodInListener;
         }
+        
+        public void DisableErrorsCountChangedListener(Action methodInListener)
+        {
+            _errorsCountChanged -= methodInListener;
+        }
+        
     }
 }

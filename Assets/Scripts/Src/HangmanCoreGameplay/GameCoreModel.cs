@@ -9,8 +9,8 @@ namespace Src.HangmanCoreGameplay
         
         private string _wordInGame;
         private int _errorsCount;
-        private List<int> _openedSymbolsInWord;
-        private HashSet<char> _turnsDone;
+        private readonly List<int> _openedSymbolsInWord;
+        private readonly HashSet<char> _turnsDone;
 
         public GameCoreModel(string wordForGame)
         {

@@ -1,6 +1,6 @@
-﻿namespace Src.HangmanGameResult
+namespace Src.HangmanGameResult
 {
-    public class GameResultModel : IGameResultModel
+    public class GameResultModel
     {
         private const int MAX_ERRORS_COUNT = 6;
 
