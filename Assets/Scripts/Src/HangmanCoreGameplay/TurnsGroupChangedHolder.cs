@@ -19,12 +19,12 @@ namespace Src.HangmanCoreGameplay
             }
         }
 
-        private void EnableListener(ITurnsGroupChangedListener listener)
+        public void EnableListener(ITurnsGroupChangedListener listener)
         {
             _turnGroupChanged += listener.UpdateValuesAfterTurn;
         }
 
-        private void DisableListener(ITurnsGroupChangedListener listener)
+        public void DisableListener(ITurnsGroupChangedListener listener)
         {
             _turnGroupChanged -= listener.UpdateValuesAfterTurn;
         }

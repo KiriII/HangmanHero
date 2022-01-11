@@ -5,21 +5,22 @@ namespace Src.HangmanGameResult
 {
     public class HangmanGameResult : IHangamGameResult
     {
-        private GameResultModel _gameResultModel;
         private GameResultController _gameResultController;
-        private GameResultCalculator _gameResultCalculator;
+        private GameFinishedCalculator _gameFinishedCalculator;
+        
+        public event Action<HangmanGameFinishedState> _gameStateChanged;
 
         public HangmanGameResult(IHangmanGameCoreData hangmanGameCoreData)
         {
-            _gameResultCalculator = new GameResultCalculator(hangmanGameCoreData);
-            _gameResultController = new GameResultController(_gameResultCalculator);
+            _gameFinishedCalculator = new GameFinishedCalculator(hangmanGameCoreData);
+            _gameResultController = new GameResultController(_gameFinishedCalculator, _gameStateChanged);
 
             StartNewGame(hangmanGameCoreData);
         }
         
         public void StartNewGame(IHangmanGameCoreData hangmanGameCoreData)
         {
-            _gameResultCalculator.SetHangmanGameCoreData(hangmanGameCoreData);
+            _gameFinishedCalculator.SetHangmanGameCoreData(hangmanGameCoreData);
             AddActionsListeners(hangmanGameCoreData);
         }
         
@@ -31,12 +32,12 @@ namespace Src.HangmanGameResult
 
         public void EnableGameStateChangedListener(Action<HangmanGameFinishedState> methodInListener)
         {
-            _gameResultController.EnableGameStateChangedListener(methodInListener);
+            _gameStateChanged += methodInListener;
         }
         
         public void DisableGameStateChangedListener(Action<HangmanGameFinishedState> methodInListener)
         {
-            _gameResultController.DisableGameStateChangedListener(methodInListener);
+            _gameStateChanged -= methodInListener;
         }
     }
 }

@@ -2,14 +2,14 @@
 
 namespace Src.HangmanGameResult
 {
-    public class GameResultCalculator
+    public class GameFinishedCalculator
     {
         private IHangmanGameCoreData _hangmanGameCoreData;
-        private GameResultModel _gameResultModel;
+        private MaxErrorsModel _maxErrorsModel;
 
-        public GameResultCalculator(IHangmanGameCoreData hangmanGameCoreData)
+        public GameFinishedCalculator(IHangmanGameCoreData hangmanGameCoreData)
         {
-            _gameResultModel = new GameResultModel();
+            _maxErrorsModel = new MaxErrorsModel();
             SetHangmanGameCoreData(hangmanGameCoreData);
         }
 
@@ -27,7 +27,7 @@ namespace Src.HangmanGameResult
         public bool IsGameFailed()
         {
             var currentErrorsCount = _hangmanGameCoreData.GetErrorsCount();
-            var errorsRunOut = _gameResultModel.IsErrorsRunOut(currentErrorsCount);
+            var errorsRunOut = _maxErrorsModel.IsErrorsRunOut(currentErrorsCount);
             return errorsRunOut;
         }
     }

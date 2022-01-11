@@ -4,17 +4,17 @@ namespace Src.HangmanGameResult
 {
     public class GameResultController
     {
-        private GameResultCalculator _gameResultCalculator;
+        private GameFinishedCalculator _gameFinishedCalculator;
         public event Action<HangmanGameFinishedState> _gameStateChanged;
 
-        public GameResultController(GameResultCalculator gameResultCalculator)
+        public GameResultController(GameFinishedCalculator gameFinishedCalculator, Action<HangmanGameFinishedState> _gameStateChanged)
         {
-            _gameResultCalculator = gameResultCalculator;
+            _gameFinishedCalculator = gameFinishedCalculator;
         }
 
         public void CalculateGameResultAfterWordOpened()
         {
-            if (_gameResultCalculator.IsGameWined())
+            if (_gameFinishedCalculator.IsGameWined())
             {
                 OnGameStateChanged(HangmanGameFinishedState.Victory);
             } 
@@ -22,7 +22,7 @@ namespace Src.HangmanGameResult
 
         public void CalculateGameResultAfterErrorDone()
         {
-            if (_gameResultCalculator.IsGameFailed())
+            if (_gameFinishedCalculator.IsGameFailed())
             {
                 OnGameStateChanged(HangmanGameFinishedState.Failed);
             } 
@@ -31,16 +31,6 @@ namespace Src.HangmanGameResult
         private void OnGameStateChanged(HangmanGameFinishedState hangmanGameFinishedState)
         {
             _gameStateChanged?.Invoke(hangmanGameFinishedState);
-        }
-        
-        public void EnableGameStateChangedListener(Action<HangmanGameFinishedState> methodInListener)
-        {
-            _gameStateChanged += methodInListener;
-        }
-
-        public void DisableGameStateChangedListener(Action<HangmanGameFinishedState> methodInListener)
-        {
-            _gameStateChanged -= methodInListener;
         }
     }
 }
