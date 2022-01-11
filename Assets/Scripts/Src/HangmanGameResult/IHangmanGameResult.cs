@@ -3,7 +3,7 @@ using Src.HangmanCoreGameplay;
 
 namespace Src.HangmanGameResult
 {
-    public interface IHangamGameResult
+    public interface IHangmanGameResult
     {
         void StartNewGame(IHangmanGameCoreData hangmanGameCoreData);
 

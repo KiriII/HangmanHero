@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Src.HangmanGameResult
 {
@@ -7,7 +8,7 @@ namespace Src.HangmanGameResult
         private GameFinishedCalculator _gameFinishedCalculator;
         public event Action<HangmanGameFinishedState> _gameStateChanged;
 
-        public GameResultController(GameFinishedCalculator gameFinishedCalculator, Action<HangmanGameFinishedState> _gameStateChanged)
+        public GameResultController(GameFinishedCalculator gameFinishedCalculator)
         {
             _gameFinishedCalculator = gameFinishedCalculator;
         }
@@ -31,6 +32,16 @@ namespace Src.HangmanGameResult
         private void OnGameStateChanged(HangmanGameFinishedState hangmanGameFinishedState)
         {
             _gameStateChanged?.Invoke(hangmanGameFinishedState);
+        }
+        
+        public void EnableGameStateChangedListener(Action<HangmanGameFinishedState> methodInListener)
+        {
+            _gameStateChanged += methodInListener;
+        }
+        
+        public void DisableGameStateChangedListener(Action<HangmanGameFinishedState> methodInListener)
+        {
+            _gameStateChanged -= methodInListener;
         }
     }
 }

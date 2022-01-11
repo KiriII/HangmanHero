@@ -1,21 +1,18 @@
 using System;
 using Src.HangmanCoreGameplay;
+using UnityEngine;
 
 namespace Src.HangmanGameResult
 {
-    public class HangmanGameResult : IHangamGameResult
+    public class HangmanGamesResult : IHangmanGameResult
     {
         private GameResultController _gameResultController;
         private GameFinishedCalculator _gameFinishedCalculator;
-        
-        public event Action<HangmanGameFinishedState> _gameStateChanged;
 
-        public HangmanGameResult(IHangmanGameCoreData hangmanGameCoreData)
+        public HangmanGamesResult()
         {
-            _gameFinishedCalculator = new GameFinishedCalculator(hangmanGameCoreData);
-            _gameResultController = new GameResultController(_gameFinishedCalculator, _gameStateChanged);
-
-            StartNewGame(hangmanGameCoreData);
+            _gameFinishedCalculator = new GameFinishedCalculator();
+            _gameResultController = new GameResultController(_gameFinishedCalculator);
         }
         
         public void StartNewGame(IHangmanGameCoreData hangmanGameCoreData)
@@ -32,12 +29,12 @@ namespace Src.HangmanGameResult
 
         public void EnableGameStateChangedListener(Action<HangmanGameFinishedState> methodInListener)
         {
-            _gameStateChanged += methodInListener;
+            _gameResultController.EnableGameStateChangedListener(methodInListener);
         }
         
         public void DisableGameStateChangedListener(Action<HangmanGameFinishedState> methodInListener)
         {
-            _gameStateChanged -= methodInListener;
+            _gameResultController.DisableGameStateChangedListener(methodInListener);
         }
     }
 }

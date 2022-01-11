@@ -1,4 +1,5 @@
 ﻿using Src.HangmanCoreGameplay;
+using UnityEngine;
 
 namespace Src.HangmanGameResult
 {
@@ -7,10 +8,9 @@ namespace Src.HangmanGameResult
         private IHangmanGameCoreData _hangmanGameCoreData;
         private MaxErrorsModel _maxErrorsModel;
 
-        public GameFinishedCalculator(IHangmanGameCoreData hangmanGameCoreData)
+        public GameFinishedCalculator()
         {
             _maxErrorsModel = new MaxErrorsModel();
-            SetHangmanGameCoreData(hangmanGameCoreData);
         }
 
         public void SetHangmanGameCoreData(IHangmanGameCoreData hangmanGameCoreData)

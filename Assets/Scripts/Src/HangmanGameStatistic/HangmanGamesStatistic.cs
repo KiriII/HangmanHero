@@ -7,13 +7,12 @@ namespace Src.HangmanGameStatistic
     {
         private HangmanStatisticModel _gamesStatisticModel;
 
-        public HangmanGamesStatistic(IHangamGameResult hangamGameResult)
+        public HangmanGamesStatistic()
         {
             _gamesStatisticModel = new HangmanStatisticModel();
-            hangamGameResult.EnableGameStateChangedListener(UpdateStatistic);
         }
 
-        private void UpdateStatistic(HangmanGameFinishedState hangmanGameFinishedState)
+        public void UpdateStatistic(HangmanGameFinishedState hangmanGameFinishedState)
         {
             _gamesStatisticModel.AddGameToStatisticWithState(hangmanGameFinishedState);
         }

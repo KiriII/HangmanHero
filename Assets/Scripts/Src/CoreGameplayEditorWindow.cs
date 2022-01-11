@@ -1,6 +1,7 @@
 using System;
 using UnityEditor;
 using Src.HangmanCoreGameplay;
+using Src.HangmanGame;
 using Src.HangmanGameResult;
 using Src.HangmanGameStatistic;
 using UnityEngine;
@@ -10,9 +11,7 @@ public class CoreGameplayEditorWindow : EditorWindow
     private string _word;
     private string _symbol;
 
-    private static HangmanGameCore _hangmanGameCore;
-    private static IHangmanGamesStatistic _hangmanGamesStatistic;
-    private static IHangamGameResult _hangamGameResult;
+    private static HangmanGame _hangmanGame;
     
     [MenuItem("HangmanHero/CoreTest")]
     public static void ShowWindow()
@@ -24,32 +23,23 @@ public class CoreGameplayEditorWindow : EditorWindow
     {
         if (GUILayout.Button("RESET"))
         {
-            _hangmanGameCore = new HangmanGameCore(_word);
-
-            _hangamGameResult = new HangmanGameResult(_hangmanGameCore);
-
-            _hangmanGamesStatistic = new HangmanGamesStatistic(_hangamGameResult);
+            _hangmanGame = new HangmanGame();
         }
         
         _word = EditorGUILayout.TextField("word", _word);
 
         if (GUILayout.Button("START GAME"))
         {
-            _hangmanGameCore = new HangmanGameCore(_word);
-
-            _hangmanGameCore.PrintModelState();
-            
-            _hangamGameResult.StartNewGame(_hangmanGameCore);
-        }
-        
-        if (GUILayout.Button("MAKE TURN"))
-        {
-            _hangmanGameCore.Turn(_symbol[0]);
-            
-            _hangmanGameCore.PrintModelState();
-            Debug.Log($"wins = {_hangmanGamesStatistic.GetWinsCount()} loses = {_hangmanGamesStatistic.GetLosesCount()}");
+            _hangmanGame.StartGame(_word);
         }
 
         _symbol = EditorGUILayout.TextField("input char", _symbol);
+        
+        if (GUILayout.Button("MAKE TURN"))
+        {
+            _hangmanGame.Turn(_symbol[0]);
+            var hangmanGamesStatistic = _hangmanGame.hangmanGamesStatistic;
+            Debug.Log($"wins = {hangmanGamesStatistic.GetWinsCount()} loses = {hangmanGamesStatistic.GetLosesCount()}");
+        }
     }
 }
