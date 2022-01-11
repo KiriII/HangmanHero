@@ -1,54 +1,33 @@
 using System;
-using Src.HangmanCoreGameplay;
 
 namespace Src.HangmanGameResult
 {
     public class GameResultController
     {
-        private IHangmanGameCoreData _hangmanGameCoreData;
-        private GameResultModel _gameResultModel;
+        private GameResultCalculator _gameResultCalculator;
         public event Action<HangmanGameFinishedState> _gameStateChanged;
 
-        public GameResultController(IHangmanGameCoreData hangmanGameCoreData)
+        public GameResultController(GameResultCalculator gameResultCalculator)
         {
-            _gameResultModel = new GameResultModel();
-            SetHangmanGameCoreData(hangmanGameCoreData);
-        }
-        
-        public void SetHangmanGameCoreData(IHangmanGameCoreData hangmanGameCoreData)
-        {
-            _hangmanGameCoreData = hangmanGameCoreData;
+            _gameResultCalculator = gameResultCalculator;
         }
 
         public void CalculateGameResultAfterWordOpened()
         {
-            if (IsGameWined())
+            if (_gameResultCalculator.IsGameWined())
             {
                 OnGameStateChanged(HangmanGameFinishedState.Victory);
             } 
         }
-        
-        private bool IsGameWined()
-        {
-            var isAllWordOpened = _hangmanGameCoreData.IsHiddenWordOpened();
-            return isAllWordOpened;
-        }
 
         public void CalculateGameResultAfterErrorDone()
         {
-            if (IsGameFailed())
+            if (_gameResultCalculator.IsGameFailed())
             {
                 OnGameStateChanged(HangmanGameFinishedState.Failed);
             } 
         }
 
-        private bool IsGameFailed()
-        {
-            var currentErrorsCount = _hangmanGameCoreData.GetErrorsCount();
-            var errorsRunOut = _gameResultModel.IsErrorsRunOut(currentErrorsCount);
-            return errorsRunOut;
-        }
-        
         private void OnGameStateChanged(HangmanGameFinishedState hangmanGameFinishedState)
         {
             _gameStateChanged?.Invoke(hangmanGameFinishedState);
