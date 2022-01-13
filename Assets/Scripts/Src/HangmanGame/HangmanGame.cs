@@ -6,7 +6,7 @@ namespace Src.HangmanGame
 {
     public class HangmanGame : IHangmanGame
     {
-        public IHangmanGamesStatistic hangmanGamesStatistic;
+        private IHangmanGamesStatistic _hangmanGamesStatistic;
         private IHangmanGameResult _hangmanGameResult;
 
         private HangmanState _hangmanState;
@@ -15,15 +15,20 @@ namespace Src.HangmanGame
         {
             ChangeGameState(new GameFinishedState());
             
-            hangmanGamesStatistic = new HangmanGamesStatistic();
-            _hangmanGameResult = new HangmanGamesResult();
-            _hangmanGameResult.EnableGameStateChangedListener(FinishGame);
+            InitHangmanApis();
         }
 
         public void ChangeGameState(HangmanState hangmanState)
         {
             _hangmanState = hangmanState;
             _hangmanState.SetHangmanGame(this);
+        }
+
+        private void InitHangmanApis()
+        {
+            _hangmanGamesStatistic = new HangmanGamesStatistic();
+            _hangmanGameResult = new HangmanGamesResult();
+            _hangmanGameResult.EnableGameStateChangedListener(FinishGame);
         }
         
         public void Turn(char symbol)
@@ -38,7 +43,17 @@ namespace Src.HangmanGame
 
         private void FinishGame(HangmanGameFinishedState hangmanGameFinishedState)
         {
-            _hangmanState.FinishGame(hangmanGameFinishedState, hangmanGamesStatistic);
+            _hangmanState.FinishGame(hangmanGameFinishedState, _hangmanGamesStatistic);
         }
+
+        //---------------debug--------------
+
+        public string GetStatisticAsString()
+        {
+            var wins = _hangmanGamesStatistic.GetWinsCount();
+            var loses = _hangmanGamesStatistic.GetLosesCount();
+            return $"wins = {wins} loses = {loses}";
+        }
+
     }
 }

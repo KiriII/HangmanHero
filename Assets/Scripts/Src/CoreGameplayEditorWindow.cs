@@ -38,8 +38,7 @@ public class CoreGameplayEditorWindow : EditorWindow
         if (GUILayout.Button("MAKE TURN"))
         {
             _hangmanGame.Turn(_symbol[0]);
-            var hangmanGamesStatistic = _hangmanGame.hangmanGamesStatistic;
-            Debug.Log($"wins = {hangmanGamesStatistic.GetWinsCount()} loses = {hangmanGamesStatistic.GetLosesCount()}");
+            Debug.Log(_hangmanGame.GetStatisticAsString());
         }
     }
 }
