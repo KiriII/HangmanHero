@@ -27,12 +27,12 @@ namespace Src.HangmanGameResult
             hangmanGameCoreData.EnableErrorsCountChangedListener(_gameResultController.CalculateGameResultAfterErrorDone);
         }
 
-        public void EnableGameStateChangedListener(Action<HangmanGameFinishedState> methodInListener)
+        public void EnableGameStateChangedListener(Action<HangmanGameState> methodInListener)
         {
             _gameResultController.EnableGameStateChangedListener(methodInListener);
         }
         
-        public void DisableGameStateChangedListener(Action<HangmanGameFinishedState> methodInListener)
+        public void DisableGameStateChangedListener(Action<HangmanGameState> methodInListener)
         {
             _gameResultController.DisableGameStateChangedListener(methodInListener);
         }

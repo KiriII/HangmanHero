@@ -1,7 +1,6 @@
 using System;
 using UnityEditor;
 using Src.HangmanCoreGameplay;
-using Src.HangmanGame;
 using Src.HangmanGameResult;
 using Src.HangmanGameStatistic;
 using UnityEngine;
@@ -10,7 +9,7 @@ public class CoreGameplayEditorWindow : EditorWindow
 {
     private string _word;
     private string _symbol;
-
+/*
     private static HangmanGame _hangmanGame;
     
     [MenuItem("HangmanHero/CoreTest")]
@@ -40,5 +39,5 @@ public class CoreGameplayEditorWindow : EditorWindow
             _hangmanGame.Turn(_symbol[0]);
             Debug.Log(_hangmanGame.GetStatisticAsString());
         }
-    }
+    }*/
 }

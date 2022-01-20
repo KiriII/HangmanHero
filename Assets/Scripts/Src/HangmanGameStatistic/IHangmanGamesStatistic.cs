@@ -4,6 +4,6 @@ namespace Src.HangmanGameStatistic
     {
         int GetWinsCount();
         int GetLosesCount();
-        void UpdateStatistic(HangmanGameFinishedState hangmanGameFinishedState);
+        void UpdateStatistic(HangmanGameState hangmanGameFinishedState);
     }
 }

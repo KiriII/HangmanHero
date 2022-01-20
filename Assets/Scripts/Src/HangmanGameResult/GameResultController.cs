@@ -6,7 +6,7 @@ namespace Src.HangmanGameResult
     public class GameResultController
     {
         private GameFinishedCalculator _gameFinishedCalculator;
-        public event Action<HangmanGameFinishedState> _gameStateChanged;
+        public event Action<HangmanGameState> _gameStateChanged;
 
         public GameResultController(GameFinishedCalculator gameFinishedCalculator)
         {
@@ -17,7 +17,7 @@ namespace Src.HangmanGameResult
         {
             if (_gameFinishedCalculator.IsGameWined())
             {
-                OnGameStateChanged(HangmanGameFinishedState.Victory);
+                OnGameStateChanged(HangmanGameState.GameWon);
             } 
         }
 
@@ -25,21 +25,21 @@ namespace Src.HangmanGameResult
         {
             if (_gameFinishedCalculator.IsGameFailed())
             {
-                OnGameStateChanged(HangmanGameFinishedState.Failed);
+                OnGameStateChanged(HangmanGameState.GameLost);
             } 
         }
 
-        private void OnGameStateChanged(HangmanGameFinishedState hangmanGameFinishedState)
+        private void OnGameStateChanged(HangmanGameState hangmanGameFinishedState)
         {
             _gameStateChanged?.Invoke(hangmanGameFinishedState);
         }
         
-        public void EnableGameStateChangedListener(Action<HangmanGameFinishedState> methodInListener)
+        public void EnableGameStateChangedListener(Action<HangmanGameState> methodInListener)
         {
             _gameStateChanged += methodInListener;
         }
         
-        public void DisableGameStateChangedListener(Action<HangmanGameFinishedState> methodInListener)
+        public void DisableGameStateChangedListener(Action<HangmanGameState> methodInListener)
         {
             _gameStateChanged -= methodInListener;
         }

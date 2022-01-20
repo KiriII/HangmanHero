@@ -12,19 +12,19 @@ namespace Src.HangmanGameStatistic
             _gamesStatisticModel = new HangmanStatisticModel();
         }
 
-        public void UpdateStatistic(HangmanGameFinishedState hangmanGameFinishedState)
+        public void UpdateStatistic(HangmanGameState hangmanGameFinishedState)
         {
             _gamesStatisticModel.AddGameToStatisticWithState(hangmanGameFinishedState);
         }
         
         public int GetWinsCount()
         {
-            return _gamesStatisticModel.GetGamesCountWithState(HangmanGameFinishedState.Victory);
+            return _gamesStatisticModel.GetGamesCountWithState(HangmanGameState.GameWon);
         }
 
         public int GetLosesCount()
         {
-            return _gamesStatisticModel.GetGamesCountWithState(HangmanGameFinishedState.Failed);
+            return _gamesStatisticModel.GetGamesCountWithState(HangmanGameState.GameLost);
         }
     }
 }
