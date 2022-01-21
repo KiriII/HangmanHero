@@ -13,6 +13,11 @@ namespace Src.GameState
         {
             _currentGameState = gameState;
         }
+
+        public bool CheckCurrentGameStateEquals(HangmanGameState gameState)
+        {
+            return gameState == _currentGameState;
+        }
         
         public void SetCurrentState(HangmanGameState gameState)
         {

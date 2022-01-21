@@ -1,7 +1,7 @@
 public enum HangmanGameState
 {
     Undefined,
-    GameInProgress, 
+    GameInProgress,
     GameWon,
     GameLost
 }

@@ -16,7 +16,7 @@ namespace Src.GameState
             _gameStateController.StartGame();
         }
 
-        public void EndGame(HangmanGameState gameState)
+        public void EndGame(HangmanFinishGameState gameState)
         {
             _gameStateController.EndGame(gameState);
         }

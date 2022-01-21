@@ -11,33 +11,18 @@ namespace Src.GameState
 
         public void StartGame()
         {
-            if (CheckGameCanStart())
+            if (!_gameStateModel.CheckCurrentGameStateEquals(HangmanGameState.GameInProgress))
             {
                 _gameStateModel.SetCurrentState(HangmanGameState.GameInProgress);
             }
         }
 
-        private bool CheckGameCanStart()
-        {
-            var currentGameState = _gameStateModel.GetCurrentState();
-            return currentGameState != HangmanGameState.GameInProgress;
-        }
-
         public void EndGame(HangmanGameState endGameState)
         {
-            if (CheckGameCanEnd(endGameState))
+            if (_gameStateModel.CheckCurrentGameStateEquals(HangmanGameState.GameInProgress))
             {
                 _gameStateModel.SetCurrentState(endGameState);
             }
-        }
-
-        private bool CheckGameCanEnd(HangmanGameState endGameState)
-        {
-            var currentGameState = _gameStateModel.GetCurrentState();
-            if ((currentGameState != HangmanGameState.GameInProgress) ||
-                (endGameState == HangmanGameState.Undefined || endGameState == HangmanGameState.GameInProgress))
-                return false;
-            return true;
         }
     }
 }
