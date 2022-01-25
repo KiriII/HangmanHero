@@ -1,11 +1,11 @@
 namespace Src.GameState
 {
-    public class GameState : IGameState , ICurrentGameState
+    public class HangmanState : IGameState , ICurrentGameState
     {
         private GameStateModel _gameStateModel;
         private GameStateController _gameStateController;
 
-        public GameState()
+        public HangmanState()
         {
             _gameStateModel = new GameStateModel();
             _gameStateController = new GameStateController(_gameStateModel);
@@ -22,7 +22,7 @@ namespace Src.GameState
         }
 
         public HangmanGameState GetCurrentGameState()
-        {
+        {  
             return _gameStateModel.GetCurrentState();
         }
     }

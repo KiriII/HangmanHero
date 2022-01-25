@@ -1,6 +1,6 @@
-namespace Src.HangmanGameResult
+namespace Src.HangmanGame
 {
-    public class MaxErrorsModel
+    public class GameRule
     {
         private const int MAX_ERRORS_COUNT = 6;
 

@@ -11,10 +11,7 @@ namespace Src.GameState
 
         public void StartGame()
         {
-            if (!_gameStateModel.CheckCurrentGameStateEquals(HangmanGameState.GameInProgress))
-            {
-                _gameStateModel.SetCurrentState(HangmanGameState.GameInProgress);
-            }
+            _gameStateModel.SetCurrentState(HangmanGameState.GameInProgress);
         }
 
         public void EndGame(HangmanGameState endGameState)

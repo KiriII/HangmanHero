@@ -1,5 +1,6 @@
 using System;
 using Src.HangmanCoreGameplay;
+using Src.HangmanGame;
 using UnityEngine;
 
 namespace Src.HangmanGameResult
@@ -9,13 +10,15 @@ namespace Src.HangmanGameResult
         private GameResultController _gameResultController;
         private GameFinishedCalculator _gameFinishedCalculator;
 
-        public HangmanGamesResult()
+        public HangmanGamesResult(IHangmanGameCoreData hangmanGameCoreData, GameRule gameRule)
         {
-            _gameFinishedCalculator = new GameFinishedCalculator();
+            _gameFinishedCalculator = new GameFinishedCalculator(gameRule);
             _gameResultController = new GameResultController(_gameFinishedCalculator);
+
+            StartNewGame(hangmanGameCoreData);
         }
         
-        public void StartNewGame(IHangmanGameCoreData hangmanGameCoreData)
+        private void StartNewGame(IHangmanGameCoreData hangmanGameCoreData)
         {
             _gameFinishedCalculator.SetHangmanGameCoreData(hangmanGameCoreData);
             AddActionsListeners(hangmanGameCoreData);

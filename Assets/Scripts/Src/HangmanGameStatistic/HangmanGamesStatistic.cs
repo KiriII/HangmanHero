@@ -12,9 +12,9 @@ namespace Src.HangmanGameStatistic
             _gamesStatisticModel = new HangmanStatisticModel();
         }
 
-        public void UpdateStatistic(HangmanGameState hangmanGameFinishedState)
+        public void UpdateStatistic(HangmanGameState hangmanGameState)
         {
-            _gamesStatisticModel.AddGameToStatisticWithState(hangmanGameFinishedState);
+            _gamesStatisticModel.AddGameToStatisticWithState(hangmanGameState);
         }
         
         public int GetWinsCount()
